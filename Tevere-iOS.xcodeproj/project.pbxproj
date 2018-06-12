@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34B7E420EA990B60F9D98963 /* Pods_Tevere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142FE80DA72FCD2718814D73 /* Pods_Tevere_iOS.framework */; };
+		36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2B620CFE7A60041A336 /* AppDelegate.swift */; };
+		36D6E2B920CFE7A60041A336 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2B820CFE7A60041A336 /* ViewController.swift */; };
+		36D6E2BC20CFE7A60041A336 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BA20CFE7A60041A336 /* Main.storyboard */; };
+		36D6E2BE20CFE7A70041A336 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BD20CFE7A70041A336 /* Assets.xcassets */; };
+		36D6E2C120CFE7A70041A336 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */; };
+		36D6E2CC20CFE7A70041A336 /* Tevere_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2CB20CFE7A70041A336 /* Tevere_iOSTests.swift */; };
+		36D6E2D720CFE7A70041A336 /* Tevere_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2D620CFE7A70041A336 /* Tevere_iOSUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		36D6E2C820CFE7A70041A336 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36D6E2AB20CFE7A50041A336 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 36D6E2B220CFE7A50041A336;
+			remoteInfo = "Tevere-iOS";
+		};
+		36D6E2D320CFE7A70041A336 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36D6E2AB20CFE7A50041A336 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 36D6E2B220CFE7A50041A336;
+			remoteInfo = "Tevere-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		142FE80DA72FCD2718814D73 /* Pods_Tevere_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tevere_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24CE262787E75B3C4DC4B2AC /* Pods-Tevere-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tevere-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tevere-iOS/Pods-Tevere-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tevere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36D6E2B620CFE7A60041A336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		36D6E2B820CFE7A60041A336 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		36D6E2BB20CFE7A60041A336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		36D6E2BD20CFE7A70041A336 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		36D6E2C020CFE7A70041A336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		36D6E2C220CFE7A70041A336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36D6E2C720CFE7A70041A336 /* Tevere-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tevere-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36D6E2CB20CFE7A70041A336 /* Tevere_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tevere_iOSTests.swift; sourceTree = "<group>"; };
+		36D6E2CD20CFE7A70041A336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36D6E2D220CFE7A70041A336 /* Tevere-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tevere-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36D6E2D620CFE7A70041A336 /* Tevere_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tevere_iOSUITests.swift; sourceTree = "<group>"; };
+		36D6E2D820CFE7A70041A336 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B2D68731C47B581E8CD2E28 /* Pods-Tevere-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tevere-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tevere-iOS/Pods-Tevere-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		36D6E2B020CFE7A50041A336 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34B7E420EA990B60F9D98963 /* Pods_Tevere_iOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D6E2C420CFE7A70041A336 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D6E2CF20CFE7A70041A336 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		224BAFE3552B072CDB6709C1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B2D68731C47B581E8CD2E28 /* Pods-Tevere-iOS.debug.xcconfig */,
+				24CE262787E75B3C4DC4B2AC /* Pods-Tevere-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		35014B41BAFC99F297E76844 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				142FE80DA72FCD2718814D73 /* Pods_Tevere_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		36D6E2AA20CFE7A50041A336 = {
+			isa = PBXGroup;
+			children = (
+				36D6E2B520CFE7A60041A336 /* Tevere-iOS */,
+				36D6E2CA20CFE7A70041A336 /* Tevere-iOSTests */,
+				36D6E2D520CFE7A70041A336 /* Tevere-iOSUITests */,
+				36D6E2B420CFE7A60041A336 /* Products */,
+				224BAFE3552B072CDB6709C1 /* Pods */,
+				35014B41BAFC99F297E76844 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		36D6E2B420CFE7A60041A336 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */,
+				36D6E2C720CFE7A70041A336 /* Tevere-iOSTests.xctest */,
+				36D6E2D220CFE7A70041A336 /* Tevere-iOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		36D6E2B520CFE7A60041A336 /* Tevere-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				36D6E2B620CFE7A60041A336 /* AppDelegate.swift */,
+				36D6E2B820CFE7A60041A336 /* ViewController.swift */,
+				36D6E2BA20CFE7A60041A336 /* Main.storyboard */,
+				36D6E2BD20CFE7A70041A336 /* Assets.xcassets */,
+				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
+				36D6E2C220CFE7A70041A336 /* Info.plist */,
+			);
+			path = "Tevere-iOS";
+			sourceTree = "<group>";
+		};
+		36D6E2CA20CFE7A70041A336 /* Tevere-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				36D6E2CB20CFE7A70041A336 /* Tevere_iOSTests.swift */,
+				36D6E2CD20CFE7A70041A336 /* Info.plist */,
+			);
+			path = "Tevere-iOSTests";
+			sourceTree = "<group>";
+		};
+		36D6E2D520CFE7A70041A336 /* Tevere-iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				36D6E2D620CFE7A70041A336 /* Tevere_iOSUITests.swift */,
+				36D6E2D820CFE7A70041A336 /* Info.plist */,
+			);
+			path = "Tevere-iOSUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		36D6E2B220CFE7A50041A336 /* Tevere-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 36D6E2DB20CFE7A70041A336 /* Build configuration list for PBXNativeTarget "Tevere-iOS" */;
+			buildPhases = (
+				95A2748FCAFB7C8EF598264A /* [CP] Check Pods Manifest.lock */,
+				36D6E2AF20CFE7A50041A336 /* Sources */,
+				36D6E2B020CFE7A50041A336 /* Frameworks */,
+				36D6E2B120CFE7A50041A336 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tevere-iOS";
+			productName = "Tevere-iOS";
+			productReference = 36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		36D6E2C620CFE7A70041A336 /* Tevere-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 36D6E2DE20CFE7A70041A336 /* Build configuration list for PBXNativeTarget "Tevere-iOSTests" */;
+			buildPhases = (
+				36D6E2C320CFE7A70041A336 /* Sources */,
+				36D6E2C420CFE7A70041A336 /* Frameworks */,
+				36D6E2C520CFE7A70041A336 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				36D6E2C920CFE7A70041A336 /* PBXTargetDependency */,
+			);
+			name = "Tevere-iOSTests";
+			productName = "Tevere-iOSTests";
+			productReference = 36D6E2C720CFE7A70041A336 /* Tevere-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		36D6E2D120CFE7A70041A336 /* Tevere-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 36D6E2E120CFE7A70041A336 /* Build configuration list for PBXNativeTarget "Tevere-iOSUITests" */;
+			buildPhases = (
+				36D6E2CE20CFE7A70041A336 /* Sources */,
+				36D6E2CF20CFE7A70041A336 /* Frameworks */,
+				36D6E2D020CFE7A70041A336 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				36D6E2D420CFE7A70041A336 /* PBXTargetDependency */,
+			);
+			name = "Tevere-iOSUITests";
+			productName = "Tevere-iOSUITests";
+			productReference = 36D6E2D220CFE7A70041A336 /* Tevere-iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		36D6E2AB20CFE7A50041A336 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = sasau;
+				TargetAttributes = {
+					36D6E2B220CFE7A50041A336 = {
+						CreatedOnToolsVersion = 9.4;
+					};
+					36D6E2C620CFE7A70041A336 = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = 36D6E2B220CFE7A50041A336;
+					};
+					36D6E2D120CFE7A70041A336 = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = 36D6E2B220CFE7A50041A336;
+					};
+				};
+			};
+			buildConfigurationList = 36D6E2AE20CFE7A50041A336 /* Build configuration list for PBXProject "Tevere-iOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 36D6E2AA20CFE7A50041A336;
+			productRefGroup = 36D6E2B420CFE7A60041A336 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				36D6E2B220CFE7A50041A336 /* Tevere-iOS */,
+				36D6E2C620CFE7A70041A336 /* Tevere-iOSTests */,
+				36D6E2D120CFE7A70041A336 /* Tevere-iOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		36D6E2B120CFE7A50041A336 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36D6E2C120CFE7A70041A336 /* LaunchScreen.storyboard in Resources */,
+				36D6E2BE20CFE7A70041A336 /* Assets.xcassets in Resources */,
+				36D6E2BC20CFE7A60041A336 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D6E2C520CFE7A70041A336 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D6E2D020CFE7A70041A336 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		95A2748FCAFB7C8EF598264A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tevere-iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		36D6E2AF20CFE7A50041A336 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36D6E2B920CFE7A60041A336 /* ViewController.swift in Sources */,
+				36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D6E2C320CFE7A70041A336 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36D6E2CC20CFE7A70041A336 /* Tevere_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36D6E2CE20CFE7A70041A336 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36D6E2D720CFE7A70041A336 /* Tevere_iOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		36D6E2C920CFE7A70041A336 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 36D6E2B220CFE7A50041A336 /* Tevere-iOS */;
+			targetProxy = 36D6E2C820CFE7A70041A336 /* PBXContainerItemProxy */;
+		};
+		36D6E2D420CFE7A70041A336 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 36D6E2B220CFE7A50041A336 /* Tevere-iOS */;
+			targetProxy = 36D6E2D320CFE7A70041A336 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		36D6E2BA20CFE7A60041A336 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				36D6E2BB20CFE7A60041A336 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				36D6E2C020CFE7A70041A336 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		36D6E2D920CFE7A70041A336 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		36D6E2DA20CFE7A70041A336 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		36D6E2DC20CFE7A70041A336 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B2D68731C47B581E8CD2E28 /* Pods-Tevere-iOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6P78FJHUTG;
+				INFOPLIST_FILE = "Tevere-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ssuwam.Tevere-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		36D6E2DD20CFE7A70041A336 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CE262787E75B3C4DC4B2AC /* Pods-Tevere-iOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6P78FJHUTG;
+				INFOPLIST_FILE = "Tevere-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ssuwam.Tevere-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		36D6E2DF20CFE7A70041A336 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DDXVA278D6;
+				INFOPLIST_FILE = "Tevere-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ssuwam.Tevere-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tevere-iOS.app/Tevere-iOS";
+			};
+			name = Debug;
+		};
+		36D6E2E020CFE7A70041A336 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DDXVA278D6;
+				INFOPLIST_FILE = "Tevere-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ssuwam.Tevere-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tevere-iOS.app/Tevere-iOS";
+			};
+			name = Release;
+		};
+		36D6E2E220CFE7A70041A336 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DDXVA278D6;
+				INFOPLIST_FILE = "Tevere-iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ssuwam.Tevere-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tevere-iOS";
+			};
+			name = Debug;
+		};
+		36D6E2E320CFE7A70041A336 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DDXVA278D6;
+				INFOPLIST_FILE = "Tevere-iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.ssuwam.Tevere-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Tevere-iOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		36D6E2AE20CFE7A50041A336 /* Build configuration list for PBXProject "Tevere-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36D6E2D920CFE7A70041A336 /* Debug */,
+				36D6E2DA20CFE7A70041A336 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		36D6E2DB20CFE7A70041A336 /* Build configuration list for PBXNativeTarget "Tevere-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36D6E2DC20CFE7A70041A336 /* Debug */,
+				36D6E2DD20CFE7A70041A336 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		36D6E2DE20CFE7A70041A336 /* Build configuration list for PBXNativeTarget "Tevere-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36D6E2DF20CFE7A70041A336 /* Debug */,
+				36D6E2E020CFE7A70041A336 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		36D6E2E120CFE7A70041A336 /* Build configuration list for PBXNativeTarget "Tevere-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				36D6E2E220CFE7A70041A336 /* Debug */,
+				36D6E2E320CFE7A70041A336 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 36D6E2AB20CFE7A50041A336 /* Project object */;
+}
