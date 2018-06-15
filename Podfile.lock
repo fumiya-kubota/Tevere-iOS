@@ -1,4 +1,5 @@
 PODS:
+  - FontAwesomeKit.Swift (0.4.3)
   - GoogleMaps (2.7.0):
     - GoogleMaps/Maps (= 2.7.0)
   - GoogleMaps/Base (2.7.0)
@@ -8,18 +9,21 @@ PODS:
     - GoogleMaps/Base (= 2.7.0)
 
 DEPENDENCIES:
+  - FontAwesomeKit.Swift
   - GoogleMaps
   - GooglePlaces
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - FontAwesomeKit.Swift
     - GoogleMaps
     - GooglePlaces
 
 SPEC CHECKSUMS:
+  FontAwesomeKit.Swift: a1ff696276568f92f5bdde75917744eb3989f45c
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
 
-PODFILE CHECKSUM: c1b8f1aeb2fd3ab3c3d1b8715ac68f756c9eff22
+PODFILE CHECKSUM: 1daa83285eca312351aab8d69266c7167701f8c4
 
 COCOAPODS: 1.5.3
