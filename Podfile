@@ -4,5 +4,6 @@ target 'Tevere-iOS' do
     use_frameworks!
     pod 'GoogleMaps'
     pod 'GooglePlaces'
-    pod 'FontAwesomeKit.Swift'
+    pod 'SwiftyJSON', '~> 4.0'
+    pod 'Alamofire', '~> 4.7'
 end

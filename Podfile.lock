@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (4.7.2)
   - FontAwesomeKit.Swift (0.4.3)
   - GoogleMaps (2.7.0):
     - GoogleMaps/Maps (= 2.7.0)
@@ -7,23 +8,30 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (2.7.0):
     - GoogleMaps/Base (= 2.7.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.7)
   - FontAwesomeKit.Swift
   - GoogleMaps
   - GooglePlaces
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - FontAwesomeKit.Swift
     - GoogleMaps
     - GooglePlaces
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   FontAwesomeKit.Swift: a1ff696276568f92f5bdde75917744eb3989f45c
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 1daa83285eca312351aab8d69266c7167701f8c4
+PODFILE CHECKSUM: 0f44b4f910a8881e3c097c3bcbe1c8b296686cb1
 
 COCOAPODS: 1.5.3
