@@ -6,4 +6,5 @@ target 'Tevere-iOS' do
     pod 'GooglePlaces'
     pod 'SwiftyJSON', '~> 4.0'
     pod 'Alamofire', '~> 4.7'
+    pod 'SwiftDate'
 end

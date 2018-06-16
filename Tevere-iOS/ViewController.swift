@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import Alamofire
 import SwiftyJSON
+import SwiftDate
 
 
 class ViewController: UIViewController, GMSMapViewDelegate {
@@ -24,16 +25,25 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var rightrightButton: UIButton!
+    @IBOutlet weak var detailScrollView: UIScrollView!
+    @IBOutlet weak var detailDatesStackView: UIStackView!
     // UI Parameters
     var detailHeaderBeganTop: CGFloat = 0
     var showDetailHeader: Bool = true
     var showingDetail: Bool = false
+    
+    let redMakerIcon = GMSMarker.markerImage(with: .red)
+    let blueMakerIcon = GMSMarker.markerImage(with: .blue)
+    
 
     // entities
     var data: JSON? = nil
     var battle: JSON? = nil
     
     var markers: [String: GMSMarker] = [:]
+
+    let SHOW_DETAIL_LESS: CGFloat = -90.0
+    let SHOW_DETAIL_MORE: CGFloat = -UIScreen.main.bounds.height * 4 / 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,19 +92,33 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             )
             newMarkers[battle.1["uri"].stringValue] = marker
             marker.userData = battle.1
+            marker.icon = redMakerIcon
+            marker.zIndex = 1
             marker.map = mapView
         }
         for marker in markers.values {
             marker.map = nil
         }
+        if battles.count == 0 {
+            leftleftButton.isEnabled = false
+            leftButton.isEnabled = false
+            rightButton.isEnabled = false
+            rightrightButton.isEnabled = false
+        }
         markers = newMarkers
     }
     
     func updateBattle(newBattle: JSON?) {
+        if let battle_ = self.battle {
+            if let marker = self.markers[battle_["uri"].stringValue] {
+                marker.icon = redMakerIcon
+                marker.zIndex = 1
+            }
+        }
         battle = newBattle
         if let battle_ = battle {
             if detailViewTopConstraint.constant >= 0 {
-                detailViewTopConstraint.constant = -60
+                detailViewTopConstraint.constant = -90
             }
             self.detailTitleLabel.text = battle_["label"].stringValue
             if let data_ = data {
@@ -120,12 +144,31 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                     self.rightrightButton.isEnabled = true
                 }
             }
+            for date in battle_["dates"] {
+                let y = date.1["year"].stringValue
+                var dateString = "\(y)"
+                if date.1["month"] != JSON.null && date.1["month"].intValue != 0 {
+                    let m = date.1["month"].stringValue
+                    let d = date.1["day"].stringValue
+                    print(m, d)
+                    dateString.append("-\(m)-\(d)")    
+                }
+                let label = UILabel.init()
+                label.text = dateString
+                label.sizeToFit()
+                detailDatesStackView.addArrangedSubview(label)
+            }
         } else {
             detailViewTopConstraint.constant = 0
         }
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
-            self.battleNavigationView.alpha = self.battle != nil ? 1.0 : 0.0
+            if let battle_ = self.battle {
+                if let marker = self.markers[battle_["uri"].stringValue] {
+                    marker.icon = self.blueMakerIcon
+                    marker.zIndex = 100
+                }
+            }
         }
     }
 
@@ -148,11 +191,15 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             self.view.layoutIfNeeded()
         case .ended:
             if showDetailHeader {
-                detailViewTopConstraint.constant = -self.view.frame.height / 2
+                detailViewTopConstraint.constant = SHOW_DETAIL_MORE
                 showingDetail = true
+                detailScrollView.isScrollEnabled = true
+                detailScrollView.flashScrollIndicators()
             } else {
-                detailViewTopConstraint.constant = -60
+                detailViewTopConstraint.constant = SHOW_DETAIL_LESS
                 showingDetail = false
+                detailScrollView.isScrollEnabled = false
+                detailScrollView.contentOffset = CGPoint.init(x: 0, y: 0)
             }
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
@@ -167,32 +214,33 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         guard let data_ = data else {
             return
         }
-        guard let battle_ = battle else {
-            return
-        }
         var index: Int = 0
         if sender == leftleftButton {
             index = 0
         } else if sender == rightrightButton {
             index = data_["battles"].count - 1
         } else {
-            for battle in data_["battles"] {
-                if battle_["uri"] == battle.1["uri"] {
-                    index = Int(battle.0)!
-                    break
+            if let battle_ = battle {
+                for battle in data_["battles"] {
+                    if battle_["uri"] == battle.1["uri"] {
+                        index = Int(battle.0)!
+                        break
+                    }
                 }
-            }
-            if sender == leftButton {
-                index -= 1
-            } else if sender == rightButton {
-                index += 1
+                if sender == leftButton {
+                    index -= 1
+                } else if sender == rightButton {
+                    index += 1
+                }
+            } else {
+                index = 0
             }
         }
         let newBattle = data_["battles"][index]
         guard let marker = markers[newBattle["uri"].stringValue] else {
             return
         }
-        mapView.animate(to: GMSCameraPosition.camera(withTarget: marker.position, zoom: 4))
+        mapView.animate(toLocation: marker.position)
         updateBattle(newBattle: newBattle)
     }
     
@@ -204,11 +252,15 @@ class ViewController: UIViewController, GMSMapViewDelegate {
 
     @IBAction func detailViewTapped(_ sender: Any) {
         if !showingDetail {
-            detailViewTopConstraint.constant = -self.view.frame.height / 2
+            detailViewTopConstraint.constant = SHOW_DETAIL_MORE
             showingDetail = true
+            detailScrollView.isScrollEnabled = true
+            detailScrollView.flashScrollIndicators()
         } else {
-            detailViewTopConstraint.constant = -60
+            detailViewTopConstraint.constant = SHOW_DETAIL_LESS
             showingDetail = false
+            detailScrollView.isScrollEnabled = false
+            detailScrollView.contentOffset = CGPoint.init(x: 0, y: 0)
         }
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
