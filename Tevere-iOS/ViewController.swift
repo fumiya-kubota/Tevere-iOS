@@ -146,15 +146,13 @@ class ViewController: UIViewController, GMSMapViewDelegate {
             }
             for date in battle_["dates"] {
                 let y = date.1["year"].stringValue
-                var dateString = "\(y)"
                 if date.1["month"] != JSON.null && date.1["month"].intValue != 0 {
                     let m = date.1["month"].stringValue
                     let d = date.1["day"].stringValue
                     print(m, d)
-                    dateString.append("-\(m)-\(d)")    
+//                    dateString.append("-\(m)-\(d)")
                 }
                 let label = UILabel.init()
-                label.text = dateString
                 label.sizeToFit()
                 detailDatesStackView.addArrangedSubview(label)
             }
