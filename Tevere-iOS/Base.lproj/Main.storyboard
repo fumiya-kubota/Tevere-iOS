@@ -330,7 +330,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cs0-bx-V8P"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NH6-YZ-Yze"/>
+                    <navigationItem key="navigationItem" id="NH6-YZ-Yze">
+                        <nil key="title"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="ageItem" destination="Uf1-Hd-a7E" id="Av4-t4-RV8"/>
                         <outlet property="ageLeftButton" destination="QXV-Um-4ll" id="HxB-3K-1UC"/>
@@ -348,6 +350,7 @@
                         <outlet property="categoryStackViewHeight" destination="5CJ-2D-bHT" id="0gY-iP-SCV"/>
                         <outlet property="commanderStackView" destination="5GM-cJ-g7S" id="1oj-MV-YTh"/>
                         <outlet property="commanderStackViewHeight" destination="Gr2-Fh-wsU" id="YMh-lB-mlz"/>
+                        <outlet property="commanderTitleButton" destination="iDK-C6-PMf" id="oPZ-xF-QnN"/>
                         <outlet property="datesStackView" destination="3dJ-A3-MlC" id="2Z4-VN-R1b"/>
                         <outlet property="datesStackViewHeight" destination="Jdr-Yg-ShK" id="Fz6-qb-f6u"/>
                         <outlet property="leftButton" destination="UWy-yS-nCi" id="ApH-nJ-K3q"/>
@@ -356,10 +359,16 @@
                         <outlet property="rightButton" destination="6q6-dy-UiO" id="erC-eo-LiJ"/>
                         <outlet property="rightrightButton" destination="kmx-C1-SKh" id="d2A-Tr-vHa"/>
                         <outlet property="searchItem" destination="wzx-zU-SuS" id="SGX-n1-oWV"/>
+                        <outlet property="subjectTitleButton" destination="IIT-jU-uml" id="sdo-fY-hBy"/>
                         <outlet property="tabBar" destination="Lf2-fk-4Sz" id="gfa-7C-hdC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Add-yS-cM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IIT-jU-uml">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iDK-C6-PMf">
                     <rect key="frame" x="0.0" y="0.0" width="232" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

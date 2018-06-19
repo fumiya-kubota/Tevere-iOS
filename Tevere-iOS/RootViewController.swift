@@ -58,12 +58,18 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     @IBOutlet weak var categoryStackView: UIStackView!
     @IBOutlet weak var categoryStackViewHeight: NSLayoutConstraint!
 
-    // Age
+    // Fetch Data
     @IBOutlet weak var ageSlider: UISlider!
     let age = BehaviorRelay<Float>(value: -220.0)
+    let single = BehaviorRelay<Bool>(value: false)
     @IBOutlet weak var ageSwitch: UISwitch!
     @IBOutlet weak var ageLeftButton: UIButton!
     @IBOutlet weak var ageRightButton: UIButton!
+    let commander = BehaviorRelay<JSON?>(value: nil)
+    let subject = BehaviorRelay<JSON?>(value: nil)
+    @IBOutlet var commanderTitleButton: UIButton!
+    @IBOutlet var subjectTitleButton: UIButton!
+    
     // Resources
     let redMakerIcon = GMSMarker.markerImage(with: .red)
     let blueMakerIcon = GMSMarker.markerImage(with: .blue)
@@ -78,6 +84,13 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
 
     // fetch
     let disposeBag = DisposeBag()
+    
+    // layout states
+    var battleHeaderBeganTop: CGFloat = 0
+    var showDetailHeader = false
+    var showingDetail = false
+    
+    var displayLink: CADisplayLink? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.delegate = self
@@ -107,10 +120,14 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 self?.age.accept(value)
             }).disposed(by: disposeBag)
         ageSlider.rx.value.distinctUntilChanged().bind(to: age).disposed(by: disposeBag)
+        ageSwitch.rx.value.distinctUntilChanged().bind(to: single).disposed(by: disposeBag)
+
         age.bind(to: ageSlider.rx.value).disposed(by: disposeBag)
+        single.bind(to: ageSwitch.rx.value).disposed(by: disposeBag)
+
         let ageStream = Observable.combineLatest(
             age,
-            ageSwitch.rx.value.distinctUntilChanged().asObservable()
+            single
         ).map { (age, single) -> (Int, Bool) in
             if single {
                 return (Int(age), single)
@@ -134,8 +151,49 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 string = "\("西暦")\(age)\(s)"
             }
             return string
-        }.bind(to: self.rx.title).disposed(by: disposeBag)
-        
+        }.subscribe(onNext: {[weak self] (title) in
+            guard let self_ = self else {
+                return
+            }
+            self_.navigationItem.titleView = nil
+            self_.title = title
+        }).disposed(by: disposeBag)
+        commander.asObservable()
+            .map { (commanderData) -> String? in
+                guard let data = commanderData else {
+                    return nil
+                }
+                return data["label"].stringValue
+            }.subscribe(onNext: {[weak self] (title) in
+                guard let self_ = self else {
+                    return
+                }
+                guard let title_ = title else {
+                    self_.navigationItem.titleView = nil
+                    return
+                }
+                self_.commanderTitleButton.setTitle(title_, for: .normal)
+                self_.navigationItem.titleView = self_.commanderTitleButton
+            }).disposed(by: disposeBag)
+        subject.asObservable()
+            .map { (subjectData) -> String? in
+                guard let data = subjectData else {
+                    return nil
+                }
+                return data["label"].stringValue
+            }.subscribe(onNext: {[weak self] (title) in
+                guard let self_ = self else {
+                    return
+                }
+                guard let title_ = title else {
+                    self_.navigationItem.titleView = nil
+                    return
+                }
+                self_.subjectTitleButton.setTitle(title_, for: .normal)
+                self_.navigationItem.titleView = self_.subjectTitleButton
+            }).disposed(by: disposeBag)
+
+        //        Observable.merge([ageTitleStream, commanderTitleStream]).bind(to: self.rx.title).disposed(by: disposeBag)
         ageStream.debounce(0.3, scheduler: MainScheduler.instance).subscribe(onNext: { (age, single) in
             let url: String = tevereURL(year: age, singleYear: single)
             Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
@@ -296,6 +354,13 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 }
                 button.setTitle(dateString, for: .normal)
                 button.sizeToFit()
+                button.rx.controlEvent(.touchUpInside).asControlEvent().subscribe(onNext: {[weak self] _ in
+                    guard let self_ = self else {
+                        return
+                    }
+                    self_.single.accept(true)
+                    self_.age.accept(Float(y))
+                }).disposed(by: disposeBag)
                 totalHeight += button.frame.height - 5
                 self.datesStackView.addArrangedSubview(button)
             }
@@ -323,6 +388,11 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                     button.setTitle(commanderLabel, for: .normal)
                     button.titleLabel?.numberOfLines = 0
                     button.sizeToFit()
+                    button.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: {[weak self] _ in
+                        if let self_ = self {
+                            self_.commander.accept(commanderData)
+                        }
+                    }).disposed(by: disposeBag)
                     totalHeight += button.frame.height - 5
                     self.commanderStackView.addArrangedSubview(button)
                 }
@@ -339,6 +409,11 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                     button.setTitle(subjectLabel, for: .normal)
                     button.titleLabel?.numberOfLines = 0
                     button.sizeToFit()
+                    button.rx.controlEvent(.touchUpInside).asObservable().subscribe(onNext: {[weak self] _ in
+                        if let self_ = self {
+                            self_.subject.accept(subjectData)
+                        }
+                    }).disposed(by: disposeBag)
                     totalHeight += button.frame.height - 5
                     self.categoryStackView.addArrangedSubview(button)
                 }
@@ -394,12 +469,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         mapView.animate(toLocation: marker.position)
         updateBattle(newBattle: newBattle)
     }
-    
-    var battleHeaderBeganTop: CGFloat = 0
-    var showDetailHeader = false
-    var showingDetail = false
-    
-    var displayLink: CADisplayLink? = nil
     
     @IBAction func battleViewHeaderPanGesture(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
