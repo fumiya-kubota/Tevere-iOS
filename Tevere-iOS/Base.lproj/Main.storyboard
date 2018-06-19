@@ -305,7 +305,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="634" y="-324"/>
+            <point key="canvasLocation" x="287" y="-329"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OQk-DD-szi">

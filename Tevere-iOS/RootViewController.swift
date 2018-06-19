@@ -48,6 +48,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     @IBOutlet weak var battleTitleLabel: UILabel!
     // Age
     @IBOutlet weak var ageSlider: UISlider!
+    let age = BehaviorRelay<Float>(value: -220.0)
     @IBOutlet weak var ageSwitch: UISwitch!
     @IBOutlet weak var ageLeftButton: UIButton!
     @IBOutlet weak var ageRightButton: UIButton!
@@ -69,7 +70,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         super.viewDidLoad()
         tabBar.delegate = self
         battleViewTopConstraint.constant = 0
-        
         let camera = GMSCameraPosition.camera(withLatitude: 41.89083333333333, longitude: 12.477222222222222, zoom: 3.2)
         mapView.camera = camera
         mapView.delegate = self
@@ -78,8 +78,26 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         jsonStream.subscribe(onNext: {[weak self] (data) in
             self?.updateData(data: data)
         }).disposed(by: disposeBag)
+        ageLeftButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
+            guard let self_ = self else {
+                return 0
+            }
+            return self_.ageSwitch.isOn ? self_.ageSlider.value - 1.0 : self_.ageSlider.value - 10.0
+            }.subscribe(onNext: {[weak self] value in
+                self?.age.accept(value)
+            }).disposed(by: disposeBag)
+        ageRightButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
+            guard let self_ = self else {
+                return 0
+            }
+            return self_.ageSwitch.isOn ? self_.ageSlider.value + 1.0 : self_.ageSlider.value + 10.0
+            }.subscribe(onNext: {[weak self] value in
+                self?.age.accept(value)
+            }).disposed(by: disposeBag)
+        ageSlider.rx.value.distinctUntilChanged().bind(to: age).disposed(by: disposeBag)
+        age.bind(to: ageSlider.rx.value).disposed(by: disposeBag)
         let ageStream = Observable.combineLatest(
-            ageSlider.rx.value.distinctUntilChanged().asObservable(),
+            age,
             ageSwitch.rx.value.distinctUntilChanged().asObservable())
             .map { (age, single) -> (Int, Bool) in
                 if single {
@@ -107,7 +125,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         }.bind(to: self.rx.title).disposed(by: disposeBag)
         
         ageStream.debounce(0.3, scheduler: MainScheduler.instance).subscribe(onNext: { (age, single) in
-            print(age, single)
             let url: String = tevereURL(year: age, singleYear: single)
             Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
             switch response.result {
@@ -119,7 +136,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 }
             }
         }).disposed(by: disposeBag)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
