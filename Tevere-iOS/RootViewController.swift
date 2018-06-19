@@ -45,7 +45,19 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     @IBOutlet weak var ageItem: UITabBarItem!
     @IBOutlet weak var battleItem: UITabBarItem!
     @IBOutlet weak var searchItem: UITabBarItem!
+    
+    // battle
+    @IBOutlet weak var battleScrollView: UIScrollView!
     @IBOutlet weak var battleTitleLabel: UILabel!
+    @IBOutlet weak var datesStackView: UIStackView!
+    @IBOutlet weak var datesStackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var battleAbstractTextView: UITextView!
+    @IBOutlet weak var battleAbstractTextViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var commanderStackView: UIStackView!
+    @IBOutlet weak var commanderStackViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var categoryStackView: UIStackView!
+    @IBOutlet weak var categoryStackViewHeight: NSLayoutConstraint!
+
     // Age
     @IBOutlet weak var ageSlider: UISlider!
     let age = BehaviorRelay<Float>(value: -220.0)
@@ -98,15 +110,15 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         age.bind(to: ageSlider.rx.value).disposed(by: disposeBag)
         let ageStream = Observable.combineLatest(
             age,
-            ageSwitch.rx.value.distinctUntilChanged().asObservable())
-            .map { (age, single) -> (Int, Bool) in
-                if single {
-                    return (Int(age), single)
-                } else {
-                    return (Int(age) / 10 * 10, single)
-                }
-            }.distinctUntilChanged { (a, b) -> Bool in
-                return a.0 == b.0 && a.1 == b.1
+            ageSwitch.rx.value.distinctUntilChanged().asObservable()
+        ).map { (age, single) -> (Int, Bool) in
+            if single {
+                return (Int(age), single)
+            } else {
+                return (Int(age) / 10 * 10, single)
+            }
+        }.distinctUntilChanged { (a, b) -> Bool in
+            return a.0 == b.0 && a.1 == b.1
         }
         ageStream.map { (age, single) -> String in
             let s: String
@@ -255,24 +267,97 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 }
             }
             ageViewTopConstraint.constant = 0
-            battleViewTopConstraint.constant = SHOW_DETAIL_LESS
-            showingDetail = false
+            lessBattleView()
             tabBar.selectedItem = battleItem
             selectingTab = TabBarItemTag.Battle
+            
             battleTitleLabel.text = battle_["label"].stringValue
+            for subview in self.datesStackView.subviews {
+                subview.removeFromSuperview()
+            }
+            var totalHeight: CGFloat = 0
+            let calendar = Calendar(identifier: .gregorian)
+            let dateComponentsFormatter = DateComponentsFormatter()
+            dateComponentsFormatter.unitsStyle = .full
+            for date in battle_["dates"] {
+                let button = UIButton.init(type: .system)
+                let y = date.1["year"].intValue
+                let dateString: String
+                if date.1["month"].intValue <= 0 {
+                    let dateComponents = DateComponents.init(calendar: calendar, timeZone: TimeZone.current, era: y < 1 ? 0 : 1, year: y, month: nil, day: nil, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+                    dateComponentsFormatter.allowedUnits = [.era, .year]
+                    dateString = dateComponentsFormatter.string(from: dateComponents)!
+                } else {
+                    dateComponentsFormatter.allowedUnits = [.era, .year, .month, .day]
+                    let m = date.1["month"].intValue
+                    let d = date.1["day"].intValue
+                    let dateComponents = DateComponents.init(calendar: calendar, timeZone: TimeZone.current, era: y < 1 ? 0 : 1, year: y, month: m, day: d, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+                    dateString = dateComponentsFormatter.string(from: dateComponents)!
+                }
+                button.setTitle(dateString, for: .normal)
+                button.sizeToFit()
+                totalHeight += button.frame.height - 5
+                self.datesStackView.addArrangedSubview(button)
+            }
+            self.datesStackViewHeight.constant = totalHeight
+            
+            self.battleAbstractTextView.text = battle_["abstract"].stringValue
+            let size = self.battleAbstractTextView.sizeThatFits(CGSize.init(
+                width: self.battleAbstractTextView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+            self.battleAbstractTextViewHeight.constant = size.height
+            if let data_ = data {
+                for subview in self.commanderStackView.subviews {
+                    subview.removeFromSuperview()
+                }
+                for subview in self.categoryStackView.subviews {
+                    subview.removeFromSuperview()
+                }
+                totalHeight = 0
+                for commander in battle_["commanders"] {
+                    let commanderData = data_["commanders"][commander.1.stringValue]
+                    let commanderLabel = commanderData["label"].stringValue
+                    if commanderLabel.count == 0 {
+                        continue
+                    }
+                    let button = UIButton.init(type: .system)
+                    button.setTitle(commanderLabel, for: .normal)
+                    button.titleLabel?.numberOfLines = 0
+                    button.sizeToFit()
+                    totalHeight += button.frame.height - 5
+                    self.commanderStackView.addArrangedSubview(button)
+                }
+                self.commanderStackViewHeight.constant = totalHeight
+
+                totalHeight = 0
+                for commander in battle_["subjects"] {
+                    let subjectData = data_["subjects"][commander.1.stringValue]
+                    let subjectLabel = subjectData["label"].stringValue
+                    if subjectLabel.count == 0 {
+                        continue
+                    }
+                    let button = UIButton.init(type: .system)
+                    button.setTitle(subjectLabel, for: .normal)
+                    button.titleLabel?.numberOfLines = 0
+                    button.sizeToFit()
+                    totalHeight += button.frame.height - 5
+                    self.categoryStackView.addArrangedSubview(button)
+                }
+                self.categoryStackViewHeight.constant = totalHeight
+            }
+            
         } else {
             battleViewTopConstraint.constant = 0
             tabBar.selectedItem = nil
             selectingTab = nil
         }
         UIView.animate(withDuration: 0.2) {
-            self.view.layoutIfNeeded()
             if let battle_ = self.battle {
                 if let marker = self.markers[battle_["uri"].stringValue] {
                     marker.icon = self.blueMakerIcon
                     marker.zIndex = 100
                 }
             }
+            self.view.layoutIfNeeded()
         }
     }
 
@@ -333,11 +418,9 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             displayLink?.invalidate()
             displayLink = nil
             if showDetailHeader {
-                battleViewTopConstraint.constant = SHOW_DETAIL_MORE
-                showingDetail = true
+                moreBattleView()
             } else {
-                battleViewTopConstraint.constant = SHOW_DETAIL_LESS
-                showingDetail = false
+                lessBattleView()
             }
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
@@ -347,14 +430,25 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             break
         }
     }
+    
+    func lessBattleView() {
+        showingDetail = false
+        battleViewTopConstraint.constant = SHOW_DETAIL_LESS
+        battleScrollView.setContentOffset(CGPoint.zero, animated: true)
+        battleScrollView.isScrollEnabled = false
+    }
+    
+    func moreBattleView() {
+        showingDetail = true
+        battleViewTopConstraint.constant = SHOW_DETAIL_MORE
+        battleScrollView.isScrollEnabled = true
+    }
    
     @IBAction func detailViewTapped(_ sender: Any) {
         if !showingDetail {
-            battleViewTopConstraint.constant = SHOW_DETAIL_MORE
-            showingDetail = true
+            moreBattleView()
         } else {
-            battleViewTopConstraint.constant = SHOW_DETAIL_LESS
-            showingDetail = false
+            lessBattleView()
         }
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
