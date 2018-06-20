@@ -29,10 +29,10 @@ func tevereURL(year: Int, singleYear: Bool) -> String {
     return "https://tevere.cc/api/tevere?from=\(year)&to=\(year + 9)"
 }
 
-class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate {
+class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate, UIPopoverPresentationControllerDelegate, PopoverViewControllerDelegate {
     // const
     let SHOW_DETAIL_LESS: CGFloat = -90.0
-    let SHOW_DETAIL_MORE: CGFloat = -UIScreen.main.bounds.height * 5 / 10
+    let SHOW_DETAIL_MORE: CGFloat = -UIScreen.main.bounds.height / 2
     
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var mapView: GMSMapView!
@@ -60,7 +60,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
 
     // Fetch Data
     @IBOutlet weak var ageSlider: UISlider!
-    let age = BehaviorRelay<Float>(value: -220.0)
+    let age = BehaviorRelay<Int>(value: -220)
     let single = BehaviorRelay<Bool>(value: false)
     @IBOutlet weak var ageSwitch: UISwitch!
     @IBOutlet weak var ageLeftButton: UIButton!
@@ -103,10 +103,20 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         mapView.camera = camera
         mapView.delegate = self
 
-        ageSlider.rx.value.distinctUntilChanged().bind(to: age).disposed(by: disposeBag)
+        ageSlider.rx.value.distinctUntilChanged().map({ (val) -> Int in
+            return Int(val)
+        }).bind(to: age).disposed(by: disposeBag)
         ageSwitch.rx.value.distinctUntilChanged().bind(to: single).disposed(by: disposeBag)
 
-        age.bind(to: ageSlider.rx.value).disposed(by: disposeBag)
+        age.map({ (val) -> Float in
+            return Float(val)
+        }).bind(to: ageSlider.rx.value).disposed(by: disposeBag)
+        single.map {[weak self] (val) -> Int in
+            guard let self_ = self else {
+                return 0
+            }
+            return val ? self_.age.value / 10 * 10 : self_.age.value
+        }.bind(to: age).disposed(by: disposeBag)
         single.bind(to: ageSwitch.rx.value).disposed(by: disposeBag)
         let ageStream = Observable.combineLatest(
             age,
@@ -185,19 +195,19 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             self?.updateData(data: data)
         }).disposed(by: disposeBag)
         
-        ageLeftButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
+        ageLeftButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Int in
             guard let self_ = self else {
                 return 0
             }
-            return self_.ageSwitch.isOn ? self_.ageSlider.value - 1.0 : self_.ageSlider.value - 10.0
+            return self_.single.value ? self_.age.value - 1 : self_.age.value - 10
         }.subscribe(onNext: {[weak self] value in
-                self?.age.accept(value)
+            self?.age.accept(value)
         }).disposed(by: disposeBag)
-        ageRightButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
+        ageRightButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Int in
             guard let self_ = self else {
                 return 0
             }
-            return self_.ageSwitch.isOn ? self_.ageSlider.value + 1.0 : self_.ageSlider.value + 10.0
+            return self_.single.value ? self_.age.value + 1 : self_.age.value + 10
         }.subscribe(onNext: {[weak self] value in
             self?.age.accept(value)
         }).disposed(by: disposeBag)
@@ -266,6 +276,47 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         self.tabBar.selectedItem = self.ageItem
     }
     
+    @IBAction func commanderTitleButtonPushed(_ sender: UIButton) {
+        guard let commander_ = commander.value else {
+            return
+        }
+        if let vc: PopoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "popover") as! PopoverViewController? {
+            vc.data = commander_
+            vc.delegate = self
+            vc.modalPresentationStyle = .popover
+            vc.popoverPresentationController?.sourceView = sender
+            vc.popoverPresentationController?.sourceRect = sender.frame
+            vc.popoverPresentationController?.delegate = self
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func subjectTitleButtonPushed(_ sender: UIButton) {
+        guard let subject_ = subject.value else {
+            return
+        }
+        if let vc: PopoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "popover") as! PopoverViewController? {
+            vc.data = subject_
+            vc.delegate = self
+            vc.modalPresentationStyle = .popover
+            vc.popoverPresentationController?.sourceView = sender
+            vc.popoverPresentationController?.sourceRect = sender.frame
+            vc.popoverPresentationController?.delegate = self
+            vc.preferredContentSize = CGSize(width: 320, height: 200.0)
+            present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    func popoverViewControllerDeselect(vc: PopoverViewController) {
+        vc.dismiss(animated: true, completion: nil)
+        self.navigationItem.titleView = nil
+        ageResult.accept(ageResult.value)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+    
     func updateData(data: JSON) {
         self.data = data
         let battles = data["battles"]
@@ -319,6 +370,8 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         markers = newMarkers
         battleViewTopConstraint.constant = 0
         if selectingTab == TabBarItemTag.Battle {
+            battleScrollView.contentOffset = CGPoint.zero
+            battleScrollView.isScrollEnabled = false
             tabBar.selectedItem = nil
             selectingTab = nil
             battleViewTopConstraint.constant = 0
@@ -340,6 +393,9 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                     battleViewTopConstraint.constant = SHOW_DETAIL_LESS
                     break
                 case .Search:
+                    if let search = self.storyboard?.instantiateViewController(withIdentifier: "search") {
+                        self.present(search, animated: true, completion: nil)
+                    }
                     break
                 }
                 selectingTab = itemTag
@@ -435,7 +491,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                         return
                     }
                     self_.single.accept(true)
-                    self_.age.accept(Float(y))
+                    self_.age.accept(y)
                 }).disposed(by: disposeBag)
                 totalHeight += button.frame.height - 5
                 self.datesStackView.addArrangedSubview(button)
