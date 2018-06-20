@@ -67,6 +67,10 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     @IBOutlet weak var ageRightButton: UIButton!
     let commander = BehaviorRelay<JSON?>(value: nil)
     let subject = BehaviorRelay<JSON?>(value: nil)
+    
+    let ageResult = BehaviorRelay<JSON?>(value: nil)
+    let commanderResult = BehaviorRelay<JSON?>(value: nil)
+    let subjectResult = BehaviorRelay<JSON?>(value: nil)
     @IBOutlet var commanderTitleButton: UIButton!
     @IBOutlet var subjectTitleButton: UIButton!
     
@@ -173,10 +177,14 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         }).disposed(by: disposeBag)
         
         // Data Fetch
-        let jsonStream = PublishSubject<JSON>()
-        jsonStream.subscribe(onNext: {[weak self] (data) in
+        Observable<JSON?>.merge([ageResult.asObservable(), commanderResult.asObservable(), subjectResult.asObservable()]).filter { (data) -> Bool in
+            return data != nil
+        }.map { (data) -> JSON in
+            return data!
+        }.subscribe(onNext: {[weak self] (data) in
             self?.updateData(data: data)
         }).disposed(by: disposeBag)
+        
         ageLeftButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
             guard let self_ = self else {
                 return 0
@@ -191,16 +199,61 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             }
             return self_.ageSwitch.isOn ? self_.ageSlider.value + 1.0 : self_.ageSlider.value + 10.0
         }.subscribe(onNext: {[weak self] value in
-                self?.age.accept(value)
+            self?.age.accept(value)
         }).disposed(by: disposeBag)
         
-        ageStream.debounce(0.3, scheduler: MainScheduler.instance).subscribe(onNext: { (age, single) in
+        ageStream.debounce(0.3, scheduler: MainScheduler.instance).subscribe(onNext: {[weak self] (age, single) in
+            guard let self_ = self else {
+                return
+            }
             let url: String = tevereURL(year: age, singleYear: single)
             Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
             switch response.result {
                 case .success:
                     let json:JSON = JSON(response.result.value ?? kill)
-                    jsonStream.onNext(json)
+                    self_.ageResult.accept(json)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        commander.subscribe(onNext: {[weak self] (data) in
+            guard let self_ = self else {
+                return
+            }
+            guard let data_ = data else {
+                self_.ageResult.accept(self_.ageResult.value)
+                return
+            }
+            let commanderURI = data_["uri"].stringValue
+            let url = "https://tevere.cc/api/tevere?commander=\(commanderURI)"
+            Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+                switch response.result {
+                case .success:
+                    let json:JSON = JSON(response.result.value ?? kill)
+                    self_.commanderResult.accept(json)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        subject.subscribe(onNext: {[weak self]  (data) in
+            guard let self_ = self else {
+                return
+            }
+            guard let data_ = data else {
+                self_.ageResult.accept(self_.ageResult.value)
+                return
+            }
+            let subjectURI = data_["uri"].stringValue
+            let url = "https://tevere.cc/api/tevere?subject=\(subjectURI)"
+            Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
+                switch response.result {
+                case .success:
+                    let json:JSON = JSON(response.result.value ?? kill)
+                    self_.subjectResult.accept(json)
                 case .failure(let error):
                     print(error)
                 }
@@ -264,6 +317,15 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             rightrightButton.isEnabled = true
         }
         markers = newMarkers
+        battleViewTopConstraint.constant = 0
+        if selectingTab == TabBarItemTag.Battle {
+            tabBar.selectedItem = nil
+            selectingTab = nil
+            battleViewTopConstraint.constant = 0
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
