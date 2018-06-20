@@ -365,14 +365,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Add-yS-cM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IIT-jU-uml">
-                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="113" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="Button"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iDK-C6-PMf">
                     <rect key="frame" x="0.0" y="0.0" width="232" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <state key="normal" title="Button"/>
                 </button>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="ah2-so-4rb">

@@ -99,32 +99,11 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         mapView.camera = camera
         mapView.delegate = self
 
-        let jsonStream = PublishSubject<JSON>()
-        jsonStream.subscribe(onNext: {[weak self] (data) in
-            self?.updateData(data: data)
-        }).disposed(by: disposeBag)
-        ageLeftButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
-            guard let self_ = self else {
-                return 0
-            }
-            return self_.ageSwitch.isOn ? self_.ageSlider.value - 1.0 : self_.ageSlider.value - 10.0
-            }.subscribe(onNext: {[weak self] value in
-                self?.age.accept(value)
-            }).disposed(by: disposeBag)
-        ageRightButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
-            guard let self_ = self else {
-                return 0
-            }
-            return self_.ageSwitch.isOn ? self_.ageSlider.value + 1.0 : self_.ageSlider.value + 10.0
-            }.subscribe(onNext: {[weak self] value in
-                self?.age.accept(value)
-            }).disposed(by: disposeBag)
         ageSlider.rx.value.distinctUntilChanged().bind(to: age).disposed(by: disposeBag)
         ageSwitch.rx.value.distinctUntilChanged().bind(to: single).disposed(by: disposeBag)
 
         age.bind(to: ageSlider.rx.value).disposed(by: disposeBag)
         single.bind(to: ageSwitch.rx.value).disposed(by: disposeBag)
-
         let ageStream = Observable.combineLatest(
             age,
             single
@@ -137,6 +116,8 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         }.distinctUntilChanged { (a, b) -> Bool in
             return a.0 == b.0 && a.1 == b.1
         }
+        
+        // ナビゲーションのタイトル
         ageStream.map { (age, single) -> String in
             let s: String
             if (single) {
@@ -158,42 +139,61 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             self_.navigationItem.titleView = nil
             self_.title = title
         }).disposed(by: disposeBag)
-        commander.asObservable()
-            .map { (commanderData) -> String? in
-                guard let data = commanderData else {
-                    return nil
-                }
-                return data["label"].stringValue
-            }.subscribe(onNext: {[weak self] (title) in
-                guard let self_ = self else {
-                    return
-                }
-                guard let title_ = title else {
-                    self_.navigationItem.titleView = nil
-                    return
-                }
-                self_.commanderTitleButton.setTitle(title_, for: .normal)
-                self_.navigationItem.titleView = self_.commanderTitleButton
-            }).disposed(by: disposeBag)
-        subject.asObservable()
-            .map { (subjectData) -> String? in
-                guard let data = subjectData else {
-                    return nil
-                }
-                return data["label"].stringValue
-            }.subscribe(onNext: {[weak self] (title) in
-                guard let self_ = self else {
-                    return
-                }
-                guard let title_ = title else {
-                    self_.navigationItem.titleView = nil
-                    return
-                }
-                self_.subjectTitleButton.setTitle(title_, for: .normal)
-                self_.navigationItem.titleView = self_.subjectTitleButton
-            }).disposed(by: disposeBag)
-
-        //        Observable.merge([ageTitleStream, commanderTitleStream]).bind(to: self.rx.title).disposed(by: disposeBag)
+        commander.asObservable().map { (commanderData) -> String? in
+            guard let data = commanderData else {
+                return nil
+            }
+            return data["label"].stringValue
+        }.subscribe(onNext: {[weak self] (title) in
+            guard let self_ = self else {
+                return
+            }
+            guard let title_ = title else {
+                self_.navigationItem.titleView = nil
+                return
+            }
+            self_.commanderTitleButton.setTitle(title_, for: .normal)
+            self_.navigationItem.titleView = self_.commanderTitleButton
+        }).disposed(by: disposeBag)
+        subject.asObservable().map { (subjectData) -> String? in
+            guard let data = subjectData else {
+                return nil
+            }
+            return data["label"].stringValue
+        }.subscribe(onNext: {[weak self] (title) in
+            guard let self_ = self else {
+                return
+            }
+            guard let title_ = title else {
+                self_.navigationItem.titleView = nil
+                return
+            }
+            self_.subjectTitleButton.setTitle(title_, for: .normal)
+            self_.navigationItem.titleView = self_.subjectTitleButton
+        }).disposed(by: disposeBag)
+        
+        // Data Fetch
+        let jsonStream = PublishSubject<JSON>()
+        jsonStream.subscribe(onNext: {[weak self] (data) in
+            self?.updateData(data: data)
+        }).disposed(by: disposeBag)
+        ageLeftButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
+            guard let self_ = self else {
+                return 0
+            }
+            return self_.ageSwitch.isOn ? self_.ageSlider.value - 1.0 : self_.ageSlider.value - 10.0
+        }.subscribe(onNext: {[weak self] value in
+                self?.age.accept(value)
+        }).disposed(by: disposeBag)
+        ageRightButton.rx.controlEvent(UIControlEvents.touchUpInside).map {[weak self] _ -> Float in
+            guard let self_ = self else {
+                return 0
+            }
+            return self_.ageSwitch.isOn ? self_.ageSlider.value + 1.0 : self_.ageSlider.value + 10.0
+        }.subscribe(onNext: {[weak self] value in
+                self?.age.accept(value)
+        }).disposed(by: disposeBag)
+        
         ageStream.debounce(0.3, scheduler: MainScheduler.instance).subscribe(onNext: { (age, single) in
             let url: String = tevereURL(year: age, singleYear: single)
             Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
@@ -333,24 +333,38 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             for subview in self.datesStackView.subviews {
                 subview.removeFromSuperview()
             }
+            var calendar = Calendar(identifier: .gregorian)
+            let timeZone = TimeZone.init(identifier: "UTC")!
+            calendar.timeZone = timeZone
+            let locale = Locale.init(identifier: Locale.preferredLanguages.first!)
             var totalHeight: CGFloat = 0
-            let calendar = Calendar(identifier: .gregorian)
-            let dateComponentsFormatter = DateComponentsFormatter()
-            dateComponentsFormatter.unitsStyle = .full
             for date in battle_["dates"] {
                 let button = UIButton.init(type: .system)
                 let y = date.1["year"].intValue
                 let dateString: String
                 if date.1["month"].intValue <= 0 {
-                    let dateComponents = DateComponents.init(calendar: calendar, timeZone: TimeZone.current, era: y < 1 ? 0 : 1, year: y, month: nil, day: nil, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
-                    dateComponentsFormatter.allowedUnits = [.era, .year]
-                    dateString = dateComponentsFormatter.string(from: dateComponents)!
+                    let dateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: y <= 0 ? y + 1 : y)
+                    let date = dateComponents.date
+                    let f = DateFormatter()
+                    let formatter = DateFormatter.dateFormat(
+                        fromTemplate: "Gy",
+                        options: 0,
+                        locale: locale)
+                    f.timeZone = timeZone
+                    f.dateFormat = formatter
+                    dateString = f.string(from: date!)
                 } else {
-                    dateComponentsFormatter.allowedUnits = [.era, .year, .month, .day]
                     let m = date.1["month"].intValue
                     let d = date.1["day"].intValue
-                    let dateComponents = DateComponents.init(calendar: calendar, timeZone: TimeZone.current, era: y < 1 ? 0 : 1, year: y, month: m, day: d, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
-                    dateString = dateComponentsFormatter.string(from: dateComponents)!
+                    let dateComponents = DateComponents.init(
+                        calendar: calendar, timeZone: timeZone,
+                        year: y <= 0 ? y + 1 : y, month: m, day: d)
+                    let date = dateComponents.date
+                    let f = DateFormatter()
+                    let formatter = DateFormatter.dateFormat(fromTemplate: "GydMMM", options: 0, locale: locale)
+                    f.dateFormat = formatter
+                    f.timeZone = timeZone
+                    dateString = f.string(from: date!)
                 }
                 button.setTitle(dateString, for: .normal)
                 button.sizeToFit()

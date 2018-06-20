@@ -10,7 +10,6 @@
 		34B7E420EA990B60F9D98963 /* Pods_Tevere_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142FE80DA72FCD2718814D73 /* Pods_Tevere_iOS.framework */; };
 		36625C0220D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */; };
 		36625C0320D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */; };
-		3669CBB020D7611100EE5CD0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3669CBAF20D7611100EE5CD0 /* TabBarController.swift */; };
 		3669CBB220D762F600EE5CD0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3669CBB120D762F600EE5CD0 /* RootViewController.swift */; };
 		36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2B620CFE7A60041A336 /* AppDelegate.swift */; };
 		36D6E2BC20CFE7A60041A336 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BA20CFE7A60041A336 /* Main.storyboard */; };
@@ -41,7 +40,6 @@
 		142FE80DA72FCD2718814D73 /* Pods_Tevere_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tevere_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CE262787E75B3C4DC4B2AC /* Pods-Tevere-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tevere-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tevere-iOS/Pods-Tevere-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "webhostinghub-glyphs.ttf"; sourceTree = "<group>"; };
-		3669CBAF20D7611100EE5CD0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3669CBB120D762F600EE5CD0 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tevere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D6E2B620CFE7A60041A336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				36D6E2BD20CFE7A70041A336 /* Assets.xcassets */,
 				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
 				36D6E2C220CFE7A70041A336 /* Info.plist */,
-				3669CBAF20D7611100EE5CD0 /* TabBarController.swift */,
 			);
 			path = "Tevere-iOS";
 			sourceTree = "<group>";
@@ -368,7 +365,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3669CBB020D7611100EE5CD0 /* TabBarController.swift in Sources */,
 				3669CBB220D762F600EE5CD0 /* RootViewController.swift in Sources */,
 				36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */,
 			);
