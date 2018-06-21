@@ -11,7 +11,6 @@ import UIKit
 import GoogleMaps
 import Alamofire
 import SwiftyJSON
-import SwiftDate
 import RxSwift
 import RxCocoa
 
@@ -29,7 +28,7 @@ func tevereURL(year: Int, singleYear: Bool) -> String {
     return "https://tevere.cc/api/tevere?from=\(year)&to=\(year + 9)"
 }
 
-class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate, UIPopoverPresentationControllerDelegate, PopoverViewControllerDelegate {
+class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate, UIPopoverPresentationControllerDelegate, PopoverViewControllerDelegate, SearchNavicationControllerDelegate {
     // const
     let SHOW_DETAIL_LESS: CGFloat = -90.0
     let SHOW_DETAIL_MORE: CGFloat = -UIScreen.main.bounds.height / 2
@@ -368,8 +367,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             rightrightButton.isEnabled = true
         }
         markers = newMarkers
-        battleViewTopConstraint.constant = 0
-        if selectingTab == TabBarItemTag.Battle {
+        if !searchingBattle && selectingTab == TabBarItemTag.Battle {
             battleScrollView.contentOffset = CGPoint.zero
             battleScrollView.isScrollEnabled = false
             tabBar.selectedItem = nil
@@ -379,6 +377,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 self.view.layoutIfNeeded()
             }
         }
+        searchingBattle = false
     }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -425,6 +424,24 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 }
                 return
             }
+            if itemTag == TabBarItemTag.Search {
+                if let tab = selectingTab {
+                    switch tab {
+                    case .Age:
+                        tabBar.selectedItem = ageItem
+                    case .Battle:
+                        tabBar.selectedItem = battleItem
+                    default:
+                        tabBar.selectedItem = nil
+                    }
+                }
+                if let search: SearchNavigationController = self.storyboard?.instantiateViewController(withIdentifier: "search") as? SearchNavigationController {
+                    search.searchNavigationContolloerDelegate = self
+                    self.present(search, animated: true, completion: nil)
+                }
+                return
+            }
+
             ageViewTopConstraint.constant = 0
             battleViewTopConstraint.constant = 0
             
@@ -432,12 +449,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 switch itemTag {
                 case .Age:
                     ageViewTopConstraint.constant = -60
-                    selectingTab = itemTag
-                    tabBar.selectedItem = item
-                case .Search:
-                    if let search = self.storyboard?.instantiateViewController(withIdentifier: "search") {
-                        self.present(search, animated: true, completion: nil)
-                    }
                     selectingTab = itemTag
                     tabBar.selectedItem = item
                 default:
@@ -709,15 +720,34 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         return true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBar.invalidateIntrinsicContentSize()
+        self.tabBar.layoutIfNeeded()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tabBar.invalidateIntrinsicContentSize()
         self.tabBar.layoutIfNeeded()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func searchNC(nc: SearchNavigationController, commander: JSON, data: JSON) {
+        nc.dismiss(animated: true, completion: nil)
+        self.commander.accept(commander)
     }
-
+    var searchingBattle = false
+    func searchNC(nc: SearchNavigationController, battle: JSON, data: JSON) {
+        nc.dismiss(animated: true, completion: nil)
+        var resultData = data
+        resultData["battles"] = [battle]
+        updateData(data: resultData)
+        let date = battle["dates"][0]
+        updateBattle(newBattle: battle)
+        searchingBattle = true
+        age.accept(date["year"].intValue)
+        if let marker = markers[battle["uri"].stringValue] {
+            mapView.animate(toLocation: marker.position)
+        }
+    }
 }
