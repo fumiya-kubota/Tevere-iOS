@@ -383,23 +383,66 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if let itemTag = TabBarItemTag(rawValue: item.tag) {
+            if itemTag == TabBarItemTag.Battle {
+                if let tab = selectingTab {
+                    switch tab {
+                    case .Age:
+                        tabBar.selectedItem = ageItem
+                    default:
+                        tabBar.selectedItem = nil
+                    }
+                }
+
+                if selectingTab == TabBarItemTag.Battle {
+                    battleViewTopConstraint.constant = 0
+                    selectingTab = nil
+                    UIView.animate(withDuration: 0.2) {
+                        self.view.layoutIfNeeded()
+                    }
+                    return
+                }
+                if self.battle == nil {
+                    if let data_ = data {
+                        if data_["battles"][0] != JSON.null {
+                            let battle = data_["battles"][0]
+                            if let marker = markers[battle["uri"].stringValue] {
+                                mapView.animate(toLocation: marker.position)
+                            }
+                            tabBar.selectedItem = battleItem
+                            ageViewTopConstraint.constant = 0
+                            selectingTab = TabBarItemTag.Battle
+                            updateBattle(newBattle: battle)
+                        }
+                    }
+                } else {
+                    ageViewTopConstraint.constant = 0
+                    battleViewTopConstraint.constant = SHOW_DETAIL_LESS
+                    tabBar.selectedItem = battleItem
+                    selectingTab = TabBarItemTag.Battle
+                    UIView.animate(withDuration: 0.2) {
+                        self.view.layoutIfNeeded()
+                    }
+                }
+                return
+            }
             ageViewTopConstraint.constant = 0
             battleViewTopConstraint.constant = 0
+            
             if selectingTab != itemTag {
                 switch itemTag {
                 case .Age:
                     ageViewTopConstraint.constant = -60
-                case .Battle:
-                    battleViewTopConstraint.constant = SHOW_DETAIL_LESS
-                    break
+                    selectingTab = itemTag
+                    tabBar.selectedItem = item
                 case .Search:
                     if let search = self.storyboard?.instantiateViewController(withIdentifier: "search") {
                         self.present(search, animated: true, completion: nil)
                     }
+                    selectingTab = itemTag
+                    tabBar.selectedItem = item
+                default:
                     break
                 }
-                selectingTab = itemTag
-                tabBar.selectedItem = item
             } else {
                 selectingTab = nil
                 tabBar.selectedItem = nil
@@ -419,6 +462,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         }
         battle = newBattle
         if let battle_ = battle {
+            self.battleScrollView.contentOffset = CGPoint.zero
             if let data_ = data {
                 var index = 0
                 for battle in data_["battles"] {
@@ -551,7 +595,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 }
                 self.categoryStackViewHeight.constant = totalHeight
             }
-            
         } else {
             battleViewTopConstraint.constant = 0
             tabBar.selectedItem = nil
