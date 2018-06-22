@@ -12,15 +12,25 @@ import SwiftyJSON
 class SearchResultCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var abstractTextView: UITextView!
+    @IBOutlet weak var metaLabel: UILabel!
     
 }
 
 class SearchResultTableViewController: UITableViewController {
     
     var searchResult: JSON? = nil
-    
+    let formatter = DateFormatter()
+    var calendar = Calendar(identifier: .gregorian)
+    let locale = Locale.init(identifier: Locale.preferredLanguages.first!)
+    let timeZone = TimeZone.init(identifier: "UTC")!
     override func viewDidLoad() {
         super.viewDidLoad()
+        calendar.timeZone = timeZone
+        formatter.dateFormat = DateFormatter.dateFormat(
+            fromTemplate: "Gy",
+            options: 0,
+            locale: locale)
+        
     }
     
     // MARK: - Table view data source
@@ -59,8 +69,14 @@ class SearchResultTableViewController: UITableViewController {
         let data: JSON
         if indexPath.section == 0 {
             data = result["commanders"][indexPath.row]
+            let battles = data["battles"].intValue
+            cell.metaLabel.text = "表示される戦いの数: \(battles)"
         } else {
             data = result["battles"][indexPath.row]
+            let year = data["dates"][0]["year"].intValue
+            let dateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: year <= 0 ? year + 1 : year)
+            let date = dateComponents.date!
+            cell.metaLabel.text = formatter.string(from: date)
         }
         cell.titleLabel.text = data["label"].stringValue
         cell.abstractTextView.text = data["abstract"].stringValue

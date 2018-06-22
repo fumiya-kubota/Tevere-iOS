@@ -142,15 +142,15 @@
 			children = (
 				36625C0020D27F81007343A0 /* Assets */,
 				36D6E2B620CFE7A60041A336 /* AppDelegate.swift */,
-				36D6E2BA20CFE7A60041A336 /* Main.storyboard */,
 				3669CBB120D762F600EE5CD0 /* RootViewController.swift */,
-				36D6E2BD20CFE7A70041A336 /* Assets.xcassets */,
-				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
-				36D6E2C220CFE7A70041A336 /* Info.plist */,
 				362FDEF320DA696200064963 /* PopoverViewController.swift */,
 				362FDEF520DAC8D700064963 /* SearchWordViewController.swift */,
 				362FDEF920DAC92200064963 /* SearchResultTableViewController.swift */,
 				362FDEFB20DBF09100064963 /* SearchNavigationController.swift */,
+				36D6E2BA20CFE7A60041A336 /* Main.storyboard */,
+				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
+				36D6E2C220CFE7A70041A336 /* Info.plist */,
+				36D6E2BD20CFE7A70041A336 /* Assets.xcassets */,
 			);
 			path = "Tevere-iOS";
 			sourceTree = "<group>";

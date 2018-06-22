@@ -236,7 +236,8 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 return
             }
             let commanderURI = data_["uri"].stringValue
-            let url = "https://tevere.cc/api/tevere?commander=\(commanderURI)"
+            let encoded = commanderURI.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+            let url = "https://tevere.cc/api/tevere?commander=\(encoded)"
             Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
                 switch response.result {
                 case .success:
@@ -257,7 +258,8 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 return
             }
             let subjectURI = data_["uri"].stringValue
-            let url = "https://tevere.cc/api/tevere?subject=\(subjectURI)"
+            let encoded = subjectURI.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+            let url = "https://tevere.cc/api/tevere?subject=\(encoded)"
             Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON{ response in
                 switch response.result {
                 case .success:
@@ -738,16 +740,23 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     }
     var searchingBattle = false
     func searchNC(nc: SearchNavigationController, battle: JSON, data: JSON) {
-        nc.dismiss(animated: true, completion: nil)
-        var resultData = data
-        resultData["battles"] = [battle]
-        updateData(data: resultData)
-        let date = battle["dates"][0]
-        updateBattle(newBattle: battle)
-        searchingBattle = true
-        age.accept(date["year"].intValue)
-        if let marker = markers[battle["uri"].stringValue] {
-            mapView.animate(toLocation: marker.position)
+        nc.dismiss(animated: true) {
+            var resultData = data
+            resultData["battles"] = [battle]
+            self.updateData(data: resultData)
+            let date = battle["dates"][0]
+            let year = date["year"].intValue
+            if self.age.value == year {
+                self.commander.accept(nil)
+            } else {
+                self.searchingBattle = true
+                self.age.accept(date["year"].intValue)
+            }
+            self.updateBattle(newBattle: battle)
+
+            if let marker = self.markers[battle["uri"].stringValue] {
+                self.mapView.animate(toLocation: marker.position)
+            }
         }
     }
 }

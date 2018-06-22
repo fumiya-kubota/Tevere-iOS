@@ -38,6 +38,10 @@ class PopoverViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    @IBAction func closeButtonPushed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let calcTextViewHeight = self.abstractTextView.sizeThatFits(CGSize(width: self.abstractTextView.frame.width, height: CGFloat.greatestFiniteMagnitude)).height
