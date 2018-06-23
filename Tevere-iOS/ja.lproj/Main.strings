@@ -1,0 +1,75 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0ht-f7-GgP"; */
+"0ht-f7-GgP.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4XV-O1-KEz"; */
+"4XV-O1-KEz.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "選択を解除"; ObjectID = "5a8-cR-B5g"; */
+"5a8-cR-B5g.normalTitle" = "選択を解除";
+
+/* Class = "UIButton"; normalTitle = "chevronright"; ObjectID = "6q6-dy-UiO"; */
+"6q6-dy-UiO.normalTitle" = "chevronright";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "EQ1-rK-RdC"; */
+"EQ1-rK-RdC.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "IIT-jU-uml"; */
+"IIT-jU-uml.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "fastleft"; ObjectID = "Jhu-Rb-bJY"; */
+"Jhu-Rb-bJY.normalTitle" = "fastleft";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "KEF-61-3K6"; */
+"KEF-61-3K6.text" = "0";
+
+/* Class = "UILabel"; text = "単年"; ObjectID = "KXm-qC-1JJ"; */
+"KXm-qC-1JJ.text" = "単年";
+
+/* Class = "UILabel"; text = "Number Of Battles: "; ObjectID = "PZy-G9-jZb"; */
+"PZy-G9-jZb.text" = "戦いの数: ";
+
+/* Class = "UIButton"; normalTitle = "chevronleft"; ObjectID = "QXV-Um-4ll"; */
+"QXV-Um-4ll.normalTitle" = "chevronleft";
+
+/* Class = "UISearchBar"; placeholder = "戦いと司令官から検索..."; ObjectID = "SiC-zy-88T"; */
+"SiC-zy-88T.placeholder" = "戦いと司令官から検索...";
+
+/* Class = "UIButton"; normalTitle = "chevronleft"; ObjectID = "UWy-yS-nCi"; */
+"UWy-yS-nCi.normalTitle" = "chevronleft";
+
+/* Class = "UITabBarItem"; title = "年号"; ObjectID = "Uf1-Hd-a7E"; */
+"Uf1-Hd-a7E.title" = "年号";
+
+/* Class = "UILabel"; text = "司令官"; ObjectID = "XV9-8Q-yjo"; */
+"XV9-8Q-yjo.text" = "司令官";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "dQw-Jr-oFx"; */
+"dQw-Jr-oFx.text" = "Label";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "h8T-oG-rpr"; */
+"h8T-oG-rpr.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "iDK-C6-PMf"; */
+"iDK-C6-PMf.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "戦い"; ObjectID = "icB-OP-xE8"; */
+"icB-OP-xE8.title" = "戦い";
+
+/* Class = "UIButton"; normalTitle = "fastright"; ObjectID = "kmx-C1-SKh"; */
+"kmx-C1-SKh.normalTitle" = "fastright";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "oUk-Zk-rMU"; */
+"oUk-Zk-rMU.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "閉じる"; ObjectID = "rq6-vf-HLC"; */
+"rq6-vf-HLC.normalTitle" = "閉じる";
+
+/* Class = "UINavigationItem"; title = "検索"; ObjectID = "tsE-4T-wHW"; */
+"tsE-4T-wHW.title" = "検索";
+
+/* Class = "UILabel"; text = "Subjects"; ObjectID = "wh1-PO-3jB"; */
+"wh1-PO-3jB.text" = "カテゴリー";
+
+/* Class = "UIButton"; normalTitle = "chevronright"; ObjectID = "yKL-KY-cMX"; */
+"yKL-KY-cMX.normalTitle" = "chevronright";

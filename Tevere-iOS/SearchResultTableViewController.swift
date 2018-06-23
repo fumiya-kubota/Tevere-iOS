@@ -9,12 +9,20 @@
 import UIKit
 import SwiftyJSON
 
-class SearchResultCell: UITableViewCell {
+class BattleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var abstractTextView: UITextView!
     @IBOutlet weak var metaLabel: UILabel!
     
 }
+
+class CommanderCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var abstractTextView: UITextView!
+    @IBOutlet weak var metaLabel: UILabel!
+    
+}
+
 
 class SearchResultTableViewController: UITableViewController {
     
@@ -64,23 +72,27 @@ class SearchResultTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchResultCell
         let result = searchResult!["result"]
         let data: JSON
         if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Commander", for: indexPath) as! CommanderCell
             data = result["commanders"][indexPath.row]
             let battles = data["battles"].intValue
-            cell.metaLabel.text = "表示される戦いの数: \(battles)"
+            cell.titleLabel.text = data["label"].stringValue
+            cell.abstractTextView.text = data["abstract"].stringValue
+            cell.metaLabel.text = "\(battles)"
+            return cell
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Battle", for: indexPath) as! BattleCell
             data = result["battles"][indexPath.row]
             let year = data["dates"][0]["year"].intValue
             let dateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: year <= 0 ? year + 1 : year)
             let date = dateComponents.date!
+            cell.titleLabel.text = data["label"].stringValue
+            cell.abstractTextView.text = data["abstract"].stringValue
             cell.metaLabel.text = formatter.string(from: date)
+            return cell
         }
-        cell.titleLabel.text = data["label"].stringValue
-        cell.abstractTextView.text = data["abstract"].stringValue
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -12,6 +12,7 @@
 		362FDEF620DAC8D700064963 /* SearchWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FDEF520DAC8D700064963 /* SearchWordViewController.swift */; };
 		362FDEFA20DAC92200064963 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FDEF920DAC92200064963 /* SearchResultTableViewController.swift */; };
 		362FDEFC20DBF09100064963 /* SearchNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FDEFB20DBF09100064963 /* SearchNavigationController.swift */; };
+		362FDF0020DCDFC100064963 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 362FDEFF20DCDFC100064963 /* Settings.bundle */; };
 		36625C0220D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */; };
 		36625C0320D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */; };
 		3669CBB220D762F600EE5CD0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3669CBB120D762F600EE5CD0 /* RootViewController.swift */; };
@@ -47,8 +48,11 @@
 		362FDEF520DAC8D700064963 /* SearchWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordViewController.swift; sourceTree = "<group>"; };
 		362FDEF920DAC92200064963 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		362FDEFB20DBF09100064963 /* SearchNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNavigationController.swift; sourceTree = "<group>"; };
+		362FDEFF20DCDFC100064963 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "webhostinghub-glyphs.ttf"; sourceTree = "<group>"; };
 		3669CBB120D762F600EE5CD0 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		36AB5D3320DD1F1500B0C3E1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		36AB5D3520DD48F000B0C3E1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tevere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D6E2B620CFE7A60041A336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D6E2BB20CFE7A60041A336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 		36D6E2AA20CFE7A50041A336 = {
 			isa = PBXGroup;
 			children = (
+				362FDEFF20DCDFC100064963 /* Settings.bundle */,
 				36D6E2B520CFE7A60041A336 /* Tevere-iOS */,
 				36D6E2CA20CFE7A70041A336 /* Tevere-iOSTests */,
 				36D6E2D520CFE7A70041A336 /* Tevere-iOSUITests */,
@@ -144,9 +149,9 @@
 				36D6E2B620CFE7A60041A336 /* AppDelegate.swift */,
 				3669CBB120D762F600EE5CD0 /* RootViewController.swift */,
 				362FDEF320DA696200064963 /* PopoverViewController.swift */,
+				362FDEFB20DBF09100064963 /* SearchNavigationController.swift */,
 				362FDEF520DAC8D700064963 /* SearchWordViewController.swift */,
 				362FDEF920DAC92200064963 /* SearchResultTableViewController.swift */,
-				362FDEFB20DBF09100064963 /* SearchNavigationController.swift */,
 				36D6E2BA20CFE7A60041A336 /* Main.storyboard */,
 				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
 				36D6E2C220CFE7A70041A336 /* Info.plist */,
@@ -283,6 +288,7 @@
 			files = (
 				36D6E2C120CFE7A70041A336 /* LaunchScreen.storyboard in Resources */,
 				36625C0220D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */,
+				362FDF0020DCDFC100064963 /* Settings.bundle in Resources */,
 				36D6E2BE20CFE7A70041A336 /* Assets.xcassets in Resources */,
 				36D6E2BC20CFE7A60041A336 /* Main.storyboard in Resources */,
 			);
@@ -422,6 +428,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				36D6E2BB20CFE7A60041A336 /* Base */,
+				36AB5D3520DD48F000B0C3E1 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -430,6 +437,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				36D6E2C020CFE7A70041A336 /* Base */,
+				36AB5D3320DD1F1500B0C3E1 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -441,6 +449,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -501,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

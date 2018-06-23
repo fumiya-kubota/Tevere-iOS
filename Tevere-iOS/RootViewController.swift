@@ -59,7 +59,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
 
     // Fetch Data
     @IBOutlet weak var ageSlider: UISlider!
-    let age = BehaviorRelay<Int>(value: -220)
+    let age = BehaviorRelay<Int>(value: ArchivedData.shared.year)
     let single = BehaviorRelay<Bool>(value: false)
     @IBOutlet weak var ageSwitch: UISwitch!
     @IBOutlet weak var ageLeftButton: UIButton!
@@ -98,18 +98,25 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         super.viewDidLoad()
         tabBar.delegate = self
         battleViewTopConstraint.constant = 0
-        let camera = GMSCameraPosition.camera(withLatitude: 41.89083333333333, longitude: 12.477222222222222, zoom: 3.2)
+        let camera = GMSCameraPosition.camera(
+            withLatitude: ArchivedData.shared.lat,
+            longitude: ArchivedData.shared.lng,
+            zoom: ArchivedData.shared.zoom)
         mapView.camera = camera
         mapView.delegate = self
+        age.subscribe(onNext: { (age) in
+            ArchivedData.shared.updateYear(year: age)
+        }).disposed(by: disposeBag)
+
+        age.map({ (val) -> Float in
+            return Float(val)
+        }).bind(to: ageSlider.rx.value).disposed(by: disposeBag)
 
         ageSlider.rx.value.distinctUntilChanged().map({ (val) -> Int in
             return Int(val)
         }).bind(to: age).disposed(by: disposeBag)
         ageSwitch.rx.value.distinctUntilChanged().bind(to: single).disposed(by: disposeBag)
-
-        age.map({ (val) -> Float in
-            return Float(val)
-        }).bind(to: ageSlider.rx.value).disposed(by: disposeBag)
+        
         single.map {[weak self] (val) -> Int in
             guard let self_ = self else {
                 return 0
@@ -117,6 +124,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             return val ? self_.age.value / 10 * 10 : self_.age.value
         }.bind(to: age).disposed(by: disposeBag)
         single.bind(to: ageSwitch.rx.value).disposed(by: disposeBag)
+        
         let ageStream = Observable.combineLatest(
             age,
             single
@@ -131,20 +139,22 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         }
         
         // ナビゲーションのタイトル
+        var calendar = Calendar(identifier: .gregorian)
+        let timeZone = TimeZone.init(identifier: "UTC")!
+        calendar.timeZone = timeZone
+        let locale = Locale.init(identifier: Locale.preferredLanguages.first!)
+        let f = DateFormatter()
+        f.dateFormat = DateFormatter.dateFormat(
+            fromTemplate: "Gy",
+            options: 0,
+            locale: locale)
+        f.timeZone = timeZone
+
         ageStream.map { (age, single) -> String in
-            let s: String
-            if (single) {
-                s = "年"
-            } else {
-                s = "年代"
-            }
-            let string: String
-            if (age < 0) {
-                string = "\("紀元前")\(-age)\(s)"
-            } else {
-                string = "\("西暦")\(age)\(s)"
-            }
-            return string
+            let dateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: age <= 0 ? age + 1 : age)
+            let date = dateComponents.date
+            let dateString = f.string(from: date!)
+            return single ? dateString : "\(dateString)s"
         }.subscribe(onNext: {[weak self] (title) in
             guard let self_ = self else {
                 return
@@ -512,6 +522,8 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             let timeZone = TimeZone.init(identifier: "UTC")!
             calendar.timeZone = timeZone
             let locale = Locale.init(identifier: Locale.preferredLanguages.first!)
+            let f = DateFormatter()
+            f.timeZone = timeZone
             var totalHeight: CGFloat = 0
             for date in battle_["dates"] {
                 let button = UIButton.init(type: .system)
@@ -520,13 +532,10 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 if date.1["month"].intValue <= 0 {
                     let dateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: y <= 0 ? y + 1 : y)
                     let date = dateComponents.date
-                    let f = DateFormatter()
-                    let formatter = DateFormatter.dateFormat(
+                    f.dateFormat = DateFormatter.dateFormat(
                         fromTemplate: "Gy",
                         options: 0,
                         locale: locale)
-                    f.timeZone = timeZone
-                    f.dateFormat = formatter
                     dateString = f.string(from: date!)
                 } else {
                     let m = date.1["month"].intValue
@@ -535,10 +544,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                         calendar: calendar, timeZone: timeZone,
                         year: y <= 0 ? y + 1 : y, month: m, day: d)
                     let date = dateComponents.date
-                    let f = DateFormatter()
-                    let formatter = DateFormatter.dateFormat(fromTemplate: "GydMMM", options: 0, locale: locale)
-                    f.dateFormat = formatter
-                    f.timeZone = timeZone
+                    f.dateFormat = DateFormatter.dateFormat(fromTemplate: "GydMMM", options: 0, locale: locale)
                     dateString = f.string(from: date!)
                 }
                 button.setTitle(dateString, for: .normal)
@@ -758,5 +764,12 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 self.mapView.animate(toLocation: marker.position)
             }
         }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        ArchivedData.shared.updatePoint(
+            lat: position.target.latitude,
+            lng: position.target.longitude,
+            zoom: position.zoom)
     }
 }

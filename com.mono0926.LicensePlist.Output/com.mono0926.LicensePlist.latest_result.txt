@@ -1,0 +1,35 @@
+name: Alamofire, nameSpecified: 
+body: Copyright (c) 2014-2…
+version: 4.7.2
+
+name: GoogleMaps, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 2.7.0
+
+name: GooglePlaces, nameSpecified: 
+body: Copyright 2018 Googl…
+version: 2.7.0
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.2.0
+
+name: RxSwift, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.2.0
+
+name: SVProgressHUD, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 2.2.5
+
+name: SwiftyJSON, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.1.0
+
+add-version-numbers: false
+
+LicensePlist Version: 1.8.3

@@ -59,8 +59,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="司令官" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XV9-8Q-yjo">
-                                                        <rect key="frame" x="8" y="191" width="46" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commanders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XV9-8Q-yjo">
+                                                        <rect key="frame" x="8" y="191" width="92" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -71,8 +71,8 @@
                                                             <constraint firstAttribute="height" constant="60" id="Gr2-Fh-wsU"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wh1-PO-3jB">
-                                                        <rect key="frame" x="8" y="285" width="76.5" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subjects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wh1-PO-3jB">
+                                                        <rect key="frame" x="8" y="285" width="60" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -197,8 +197,8 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hih-WG-ASD">
                                                 <rect key="frame" x="242" y="15" width="51" height="31"/>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="単年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXm-qC-1JJ">
-                                                <rect key="frame" x="257.5" y="48" width="18.5" height="11"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXm-qC-1JJ">
+                                                <rect key="frame" x="242.5" y="48" width="49" height="11"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -248,8 +248,8 @@
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem tag="1" title="Age" id="Uf1-Hd-a7E"/>
-                                    <tabBarItem tag="2" title="Battle" id="icB-OP-xE8"/>
+                                    <tabBarItem tag="1" title="Age" image="age_tab" id="Uf1-Hd-a7E"/>
+                                    <tabBarItem tag="2" title="Battle" image="battle_tab" id="icB-OP-xE8"/>
                                     <tabBarItem tag="3" systemItem="search" id="wzx-zU-SuS"/>
                                 </items>
                             </tabBar>
@@ -448,9 +448,9 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5a8-cR-B5g">
-                                <rect key="frame" x="8" y="626" width="87" height="33"/>
+                                <rect key="frame" x="8" y="626" width="68" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="選択を解除">
+                                <state key="normal" title="Deselect">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -458,9 +458,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rq6-vf-HLC">
-                                <rect key="frame" x="315" y="626" width="52" height="33"/>
+                                <rect key="frame" x="323" y="626" width="44" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="閉じる"/>
+                                <state key="normal" title="Close"/>
                                 <connections>
                                     <action selector="closeButtonPushed:" destination="mOK-jE-2Ni" eventType="touchUpInside" id="8QL-aQ-Khb"/>
                                 </connections>
@@ -508,7 +508,7 @@
             </objects>
             <point key="canvasLocation" x="1135" y="-330"/>
         </scene>
-        <!--検索-->
+        <!--Search-->
         <scene sceneID="aL8-LW-yq1">
             <objects>
                 <viewController id="cVJ-yD-EMA" customClass="SearchWordViewController" customModule="Tevere_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -539,7 +539,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="戦い、司令官から検索" translatesAutoresizingMaskIntoConstraints="NO" id="SiC-zy-88T">
+                            <searchBar contentMode="redraw" placeholder="Search from battle, commander..." translatesAutoresizingMaskIntoConstraints="NO" id="SiC-zy-88T">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -556,7 +556,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bbi-iw-fvN"/>
                     </view>
-                    <navigationItem key="navigationItem" title="検索" id="tsE-4T-wHW">
+                    <navigationItem key="navigationItem" title="Search" id="tsE-4T-wHW">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AQL-pj-byZ">
                             <connections>
                                 <action selector="cancelButtonPushed:" destination="cVJ-yD-EMA" id="qt9-Df-kLH"/>
@@ -583,8 +583,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="120" id="Q7z-N1-xTk" customClass="SearchResultCell" customModule="Tevere_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Commander" rowHeight="120" id="SC6-3u-iNu" customClass="CommanderCell" customModule="Tevere_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SC6-3u-iNu" id="T1o-Fn-xXA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4XV-O1-KEz">
+                                            <rect key="frame" x="24" y="19" width="44.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xde-cB-HDS">
+                                            <rect key="frame" x="24" y="68.5" width="343" height="43"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number Of Battles: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZy-G9-jZb">
+                                            <rect key="frame" x="32" y="47.5" width="128" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEF-61-3K6">
+                                            <rect key="frame" x="160" y="48" width="9" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4XV-O1-KEz" firstAttribute="leading" secondItem="T1o-Fn-xXA" secondAttribute="leadingMargin" constant="8" id="Er7-hd-yPT"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4XV-O1-KEz" secondAttribute="trailingMargin" id="F1U-Cd-Uw3"/>
+                                        <constraint firstAttribute="trailing" secondItem="xde-cB-HDS" secondAttribute="trailing" constant="8" id="Gkg-k8-rTj"/>
+                                        <constraint firstAttribute="bottom" secondItem="xde-cB-HDS" secondAttribute="bottom" constant="8" id="QB4-n8-LU7"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KEF-61-3K6" secondAttribute="trailing" constant="20" symbolic="YES" id="QnO-7Y-nHv"/>
+                                        <constraint firstItem="xde-cB-HDS" firstAttribute="leading" secondItem="T1o-Fn-xXA" secondAttribute="leading" constant="24" id="Uky-zc-gtx"/>
+                                        <constraint firstItem="KEF-61-3K6" firstAttribute="centerY" secondItem="PZy-G9-jZb" secondAttribute="centerY" id="dgY-Tp-3OT"/>
+                                        <constraint firstItem="xde-cB-HDS" firstAttribute="top" secondItem="PZy-G9-jZb" secondAttribute="bottom" constant="4" id="eQH-Fh-pjg"/>
+                                        <constraint firstItem="PZy-G9-jZb" firstAttribute="top" secondItem="4XV-O1-KEz" secondAttribute="bottom" constant="8" id="gqg-Oy-G6W"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PZy-G9-jZb" secondAttribute="trailingMargin" id="lux-2c-HVo"/>
+                                        <constraint firstItem="PZy-G9-jZb" firstAttribute="leading" secondItem="T1o-Fn-xXA" secondAttribute="leadingMargin" constant="16" id="pqT-5a-U6c"/>
+                                        <constraint firstItem="4XV-O1-KEz" firstAttribute="top" secondItem="T1o-Fn-xXA" secondAttribute="topMargin" constant="8" id="qMJ-Jf-DqM"/>
+                                        <constraint firstItem="KEF-61-3K6" firstAttribute="leading" secondItem="PZy-G9-jZb" secondAttribute="trailing" id="zAg-jk-dx4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="abstractTextView" destination="xde-cB-HDS" id="n9t-cV-YKJ"/>
+                                    <outlet property="metaLabel" destination="KEF-61-3K6" id="M4l-gf-yQw"/>
+                                    <outlet property="titleLabel" destination="4XV-O1-KEz" id="G05-0w-wFI"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Battle" rowHeight="120" id="Q7z-N1-xTk" customClass="BattleCell" customModule="Tevere_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="148" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q7z-N1-xTk" id="VDH-nw-Ke0">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
@@ -638,7 +693,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="whP-oN-46n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2522" y="-329"/>
+            <point key="canvasLocation" x="2520.8000000000002" y="-329.68515742128938"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OQk-DD-szi">
@@ -657,4 +712,8 @@
             <point key="canvasLocation" x="-245" y="-332"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="age_tab" width="15" height="24"/>
+        <image name="battle_tab" width="25" height="24"/>
+    </resources>
 </document>
