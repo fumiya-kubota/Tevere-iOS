@@ -45,6 +45,16 @@ class SearchWordViewController: UIViewController, UITableViewDelegate, UITableVi
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboradWillHidden(sender:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            searchHistory.remove(at: searchHistory.count - indexPath.row - 1)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(searchHistory, forKey: UserDefaultsDomain.SearchHistory.rawValue)
+
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchHistory.count
     }
@@ -108,6 +118,8 @@ class SearchWordViewController: UIViewController, UITableViewDelegate, UITableVi
         searchResultViewConroller.title = self.searchText
         searchResultViewConroller.searchResult = searchResult
     }
+    
+    
     
     @objc func keyboradWillShow(sender: NSNotification) {
         let keyboardFrame = (sender.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
