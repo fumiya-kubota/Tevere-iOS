@@ -13,6 +13,7 @@ import Alamofire
 import SwiftyJSON
 import RxSwift
 import RxCocoa
+import SafariServices
 
 
 enum TabBarItemTag: Int {
@@ -29,6 +30,7 @@ func tevereURL(year: Int, singleYear: Bool) -> String {
 }
 
 class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate, UIPopoverPresentationControllerDelegate, PopoverViewControllerDelegate, SearchNavicationControllerDelegate {
+    
     // const
     let SHOW_DETAIL_LESS: CGFloat = -90.0
     let SHOW_DETAIL_MORE: CGFloat = -UIScreen.main.bounds.height / 2
@@ -300,7 +302,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         guard let commander_ = commander.value else {
             return
         }
-        if let vc: PopoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "popover") as! PopoverViewController? {
+        if let vc: PopoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "commander-popover") as! PopoverViewController? {
             vc.data = commander_
             vc.delegate = self
             vc.modalPresentationStyle = .popover
@@ -315,19 +317,19 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         guard let subject_ = subject.value else {
             return
         }
-        if let vc: PopoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "popover") as! PopoverViewController? {
+        if let vc: SubjectPopoverViewController = self.storyboard?.instantiateViewController(withIdentifier: "subject-popover") as! SubjectPopoverViewController? {
             vc.data = subject_
             vc.delegate = self
             vc.modalPresentationStyle = .popover
             vc.popoverPresentationController?.sourceView = sender
             vc.popoverPresentationController?.sourceRect = sender.frame
             vc.popoverPresentationController?.delegate = self
-            vc.preferredContentSize = CGSize(width: 320, height: 200.0)
+            vc.preferredContentSize = CGSize(width: 320, height: 100.0)
             present(vc, animated: true, completion: nil)
         }
     }
     
-    func popoverViewControllerDeselect(vc: PopoverViewController) {
+    func popoverViewControllerDeselect(vc: UIViewController) {
         vc.dismiss(animated: true, completion: nil)
         self.navigationItem.titleView = nil
         ageResult.accept(ageResult.value)
@@ -781,5 +783,17 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             lat: position.target.latitude,
             lng: position.target.longitude,
             zoom: position.zoom)
+    }
+    @IBAction func wikipediaButtonPushed(_ sender: Any) {
+        if let battle_ = battle {
+            let safari = SFSafariViewController.init(url: URL.init(string: battle_["uri"].stringValue)!)
+            safari.modalPresentationStyle = .overFullScreen
+            safari.modalTransitionStyle = .coverVertical
+            present(safari, animated: true, completion: nil)
+        }
+    }
+    @IBAction func ccBySAButtonPushed(_ sender: UIButton) {
+        UIApplication.shared.open(URL.init(string: "https://creativecommons.org/licenses/by-sa/3.0/")!, options: [:], completionHandler: nil)
+        
     }
 }

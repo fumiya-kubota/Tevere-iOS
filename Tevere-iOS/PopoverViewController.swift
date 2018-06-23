@@ -8,9 +8,10 @@
 
 import UIKit
 import SwiftyJSON
+import SafariServices
 
 protocol PopoverViewControllerDelegate : class {
-    func popoverViewControllerDeselect(vc: PopoverViewController)
+    func popoverViewControllerDeselect(vc: UIViewController)
 }
 
 
@@ -56,18 +57,19 @@ class PopoverViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func wikipediaButtonPushed(_ sender: UIButton) {
+        if let data_ = data {
+            let safari = SFSafariViewController.init(url: URL.init(string: data_["uri"].stringValue)!)
+            safari.modalPresentationStyle = .overFullScreen
+            safari.modalTransitionStyle = .coverVertical
+            present(safari, animated: true, completion: nil)
+        }
+    }
     @IBAction func deselectButtonPushed(_ sender: UIButton) {
         delegate?.popoverViewControllerDeselect(vc: self)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func ccBySAButtonPushed(_ sender: Any) {
+        UIApplication.shared.open(URL.init(string: "https://creativecommons.org/licenses/by-sa/3.0/")!, options: [:], completionHandler: nil)
     }
-    */
-
+    
 }

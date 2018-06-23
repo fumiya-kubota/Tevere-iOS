@@ -17,6 +17,7 @@
 		36625C0320D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36625C0120D27F9B007343A0 /* webhostinghub-glyphs.ttf */; };
 		3669CBB220D762F600EE5CD0 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3669CBB120D762F600EE5CD0 /* RootViewController.swift */; };
 		36AB5D3820DDEB8E00B0C3E1 /* ArchivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB5D3720DDEB8E00B0C3E1 /* ArchivedData.swift */; };
+		36AB5D3A20DE403B00B0C3E1 /* SubjectPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB5D3920DE403B00B0C3E1 /* SubjectPopoverViewController.swift */; };
 		36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2B620CFE7A60041A336 /* AppDelegate.swift */; };
 		36D6E2BC20CFE7A60041A336 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BA20CFE7A60041A336 /* Main.storyboard */; };
 		36D6E2BE20CFE7A70041A336 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BD20CFE7A70041A336 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 		36AB5D3320DD1F1500B0C3E1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		36AB5D3520DD48F000B0C3E1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		36AB5D3720DDEB8E00B0C3E1 /* ArchivedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedData.swift; sourceTree = "<group>"; };
+		36AB5D3920DE403B00B0C3E1 /* SubjectPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPopoverViewController.swift; sourceTree = "<group>"; };
 		36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tevere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D6E2B620CFE7A60041A336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D6E2BB20CFE7A60041A336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				362FDEFB20DBF09100064963 /* SearchNavigationController.swift */,
 				362FDEF520DAC8D700064963 /* SearchWordViewController.swift */,
 				362FDEF920DAC92200064963 /* SearchResultTableViewController.swift */,
+				36AB5D3920DE403B00B0C3E1 /* SubjectPopoverViewController.swift */,
 				36D6E2BA20CFE7A60041A336 /* Main.storyboard */,
 				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
 				36D6E2C220CFE7A70041A336 /* Info.plist */,
@@ -401,6 +404,7 @@
 				36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */,
 				36AB5D3820DDEB8E00B0C3E1 /* ArchivedData.swift in Sources */,
 				362FDEFA20DAC92200064963 /* SearchResultTableViewController.swift in Sources */,
+				36AB5D3A20DE403B00B0C3E1 /* SubjectPopoverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
