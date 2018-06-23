@@ -284,7 +284,16 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tabBar.selectedItem = self.ageItem
+        if let tab = selectingTab {
+            switch tab {
+            case .Age:
+                tabBar.selectedItem = ageItem
+            case .Battle:
+                tabBar.selectedItem = battleItem
+            default:
+                tabBar.selectedItem = nil
+            }
+        }
     }
     
     @IBAction func commanderTitleButtonPushed(_ sender: UIButton) {
