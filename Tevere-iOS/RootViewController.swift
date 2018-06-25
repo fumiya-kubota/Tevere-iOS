@@ -353,17 +353,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 self.battle = nil
             }
         }
-        if battles.count == 0 {
-            leftleftButton.isEnabled = false
-            leftButton.isEnabled = false
-            rightButton.isEnabled = false
-            rightrightButton.isEnabled = false
-        } else {
-            leftleftButton.isEnabled = true
-            leftButton.isEnabled = true
-            rightButton.isEnabled = true
-            rightrightButton.isEnabled = true
-        }
+        updateNavigationButton()
         if !searchingBattle && selectingTab == TabBarItemTag.Battle {
             battleScrollView.contentOffset = CGPoint.zero
             battleScrollView.isScrollEnabled = false
@@ -460,6 +450,48 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             }
         }
     }
+    
+    func updateNavigationButton() {
+        guard let data_ = data else {
+            return
+        }
+        let battles = data_["battles"]
+        if battles.count == 0 {
+            leftleftButton.isEnabled = false
+            leftButton.isEnabled = false
+            rightButton.isEnabled = false
+            rightrightButton.isEnabled = false
+            return
+        }
+        guard let battle_ = battle else {
+            leftleftButton.isEnabled = true
+            leftButton.isEnabled = true
+            rightButton.isEnabled = true
+            rightrightButton.isEnabled = true
+            return
+        }
+        var index = 0
+        for battle in data_["battles"] {
+            if battle_["uri"] == battle.1["uri"] {
+                index = Int(battle.0)!
+                break
+            }
+        }
+        if index == 0 {
+            self.leftButton.isEnabled = false
+            self.leftleftButton.isEnabled = false
+        } else {
+            self.leftButton.isEnabled = true
+            self.leftleftButton.isEnabled = true
+        }
+        if index == data_["battles"].count - 1 {
+            self.rightButton.isEnabled = false
+            self.rightrightButton.isEnabled = false
+        } else {
+            self.rightButton.isEnabled = true
+            self.rightrightButton.isEnabled = true
+        }
+    }
 
     func updateBattle(newBattle: JSON?) {
         if let battle_ = self.battle {
@@ -471,29 +503,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         battle = newBattle
         if let battle_ = battle {
             self.battleScrollView.contentOffset = CGPoint.zero
-            if let data_ = data {
-                var index = 0
-                for battle in data_["battles"] {
-                    if battle_["uri"] == battle.1["uri"] {
-                        index = Int(battle.0)!
-                        break
-                    }
-                }
-                if index == 0 {
-                    self.leftButton.isEnabled = false
-                    self.leftleftButton.isEnabled = false
-                } else {
-                    self.leftButton.isEnabled = true
-                    self.leftleftButton.isEnabled = true
-                }
-                if index == data_["battles"].count - 1 {
-                    self.rightButton.isEnabled = false
-                    self.rightrightButton.isEnabled = false
-                } else {
-                    self.rightButton.isEnabled = true
-                    self.rightrightButton.isEnabled = true
-                }
-            }
+            updateNavigationButton()
             ageViewTopConstraint.constant = 0
             lessBattleView()
             tabBar.selectedItem = battleItem

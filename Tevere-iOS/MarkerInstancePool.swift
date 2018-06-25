@@ -19,7 +19,7 @@ class MarkerInstancePool {
     let redMakerIcon = GMSMarker.markerImage(with: .red)
     let blueMakerIcon = GMSMarker.markerImage(with: .blue)
     
-    private func generateMarker(battle: JSON, places: JSON) -> GMSMarker {
+    private func updateMarker(marker: GMSMarker, battle: JSON, places: JSON) {
         var point = battle["points"][0]
         if point.isEmpty {
             let placeURI = battle["places"][0].stringValue
@@ -32,11 +32,10 @@ class MarkerInstancePool {
             latitude: lat,
             longitude: lng
         )
-        let marker = GMSMarker(position: position)
+        marker.position = position
         marker.icon = redMakerIcon
         marker.zIndex = 1
         marker.userData = battle
-        return marker
     }
     
     func plotMarker(battles: JSON, places: JSON, mapView: GMSMapView) {
@@ -47,13 +46,28 @@ class MarkerInstancePool {
                 newMarkers[uri] = plottingMarkers[uri]
                 plottingMarkers[uri] = nil
             }
-            let marker = generateMarker(battle: battle.1, places: places)
-            marker.map = mapView
-            marker.isTappable = true
-            newMarkers[battle.1["uri"].stringValue] = marker
         }
         for marker in plottingMarkers.values {
+            marker.isTappable = false
+            marker.userData = nil
             marker.map = nil
+            markerPool.append(marker)
+        }
+        for battle in battles {
+            let uri = battle.1["uri"].stringValue
+            if newMarkers[uri] != nil {
+                continue
+            }
+            let marker: GMSMarker
+            if markerPool.isEmpty {
+                marker = GMSMarker()
+            } else {
+                marker = markerPool.popLast()!
+            }
+            marker.map = mapView
+            marker.isTappable = true
+            updateMarker(marker: marker, battle: battle.1, places: places)
+            newMarkers[battle.1["uri"].stringValue] = marker
         }
         self.plottingMarkers = newMarkers
     }
