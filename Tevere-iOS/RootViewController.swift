@@ -22,6 +22,8 @@ enum TabBarItemTag: Int {
     case Search = 3
 }
 
+
+
 func tevereURL(year: Int, singleYear: Bool) -> String {
     if singleYear {
         return "https://tevere.cc/api/tevere?from=\(year)&to=\(year)"
@@ -82,7 +84,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     // entities
     var data: JSON? = nil
     var battle: JSON? = nil
-    var markers: [String: GMSMarker] = [:]
+    let markerPool = MarkerInstancePool()
     
     // states
     var selectingTab: TabBarItemTag? = TabBarItemTag.Age
@@ -156,7 +158,14 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             let dateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: age <= 0 ? age + 1 : age)
             let date = dateComponents.date
             let dateString = f.string(from: date!)
-            return single ? dateString : "\(dateString)s"
+            if single {
+                return dateString
+            }
+            let toYear = age + 9
+            let toDateComponents = DateComponents.init(calendar: calendar, timeZone: timeZone, year: toYear <= 0 ? toYear + 1 : toYear)
+            let toDate = toDateComponents.date
+            let toDateString = f.string(from: toDate!)
+            return "\(dateString)〜\(toDateString)"
         }.subscribe(onNext: {[weak self] (title) in
             guard let self_ = self else {
                 return
@@ -342,39 +351,9 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     func updateData(data: JSON) {
         self.data = data
         let battles = data["battles"]
-        var newMarkers: [String: GMSMarker] = [:]
-        for battle in battles {
-            let uri = battle.1["uri"].stringValue
-            if markers[uri] != nil {
-                newMarkers[uri] = markers[uri]
-                markers[uri] = nil
-                continue
-            }
-            let marker = GMSMarker()
-            var point = battle.1["points"][0]
-            if point.isEmpty {
-                let placeURI = battle.1["places"][0].stringValue
-                let places = data["places"]
-                let place = places[placeURI]
-                point = place["points"][0]
-            }
-            let lat: CLLocationDegrees = point[0].doubleValue
-            let lng: CLLocationDegrees = point[1].doubleValue
-            marker.position = CLLocationCoordinate2D(
-                latitude: lat,
-                longitude: lng
-            )
-            newMarkers[battle.1["uri"].stringValue] = marker
-            marker.userData = battle.1
-            marker.icon = redMakerIcon
-            marker.zIndex = 1
-            marker.map = mapView
-        }
-        for marker in markers.values {
-            marker.map = nil
-        }
+        markerPool.plotMarker(battles: battles, mapView: mapView)
         if let battle_ = self.battle {
-            if newMarkers[battle_["uri"].stringValue] == nil {
+            if markerPool.get(uri: battle_["uri"].stringValue) == nil {
                 self.battle = nil
             }
         }
@@ -389,7 +368,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             rightButton.isEnabled = true
             rightrightButton.isEnabled = true
         }
-        markers = newMarkers
         if !searchingBattle && selectingTab == TabBarItemTag.Battle {
             battleScrollView.contentOffset = CGPoint.zero
             battleScrollView.isScrollEnabled = false
@@ -427,7 +405,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                     if let data_ = data {
                         if data_["battles"][0] != JSON.null {
                             let battle = data_["battles"][0]
-                            if let marker = markers[battle["uri"].stringValue] {
+                            if let marker = markerPool.get(uri: battle["uri"].stringValue) {
                                 mapView.animate(toLocation: marker.position)
                             }
                             tabBar.selectedItem = battleItem
@@ -489,7 +467,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
 
     func updateBattle(newBattle: JSON?) {
         if let battle_ = self.battle {
-            if let marker = self.markers[battle_["uri"].stringValue] {
+            if let marker = markerPool.get(uri: battle_["uri"].stringValue) {
                 marker.icon = redMakerIcon
                 marker.zIndex = 1
             }
@@ -632,7 +610,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         }
         UIView.animate(withDuration: 0.2) {
             if let battle_ = self.battle {
-                if let marker = self.markers[battle_["uri"].stringValue] {
+                if let marker = self.markerPool.get(uri: battle_["uri"].stringValue) {
                     marker.icon = self.blueMakerIcon
                     marker.zIndex = 100
                 }
@@ -668,7 +646,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
             }
         }
         let newBattle = data_["battles"][index]
-        guard let marker = markers[newBattle["uri"].stringValue] else {
+        guard let marker = markerPool.get(uri: newBattle["uri"].stringValue) else {
             return
         }
         mapView.animate(toLocation: marker.position)
@@ -771,8 +749,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                 self.age.accept(date["year"].intValue)
             }
             self.updateBattle(newBattle: battle)
-
-            if let marker = self.markers[battle["uri"].stringValue] {
+            if let marker = self.markerPool.get(uri: battle["uri"].stringValue) {
                 self.mapView.animate(toLocation: marker.position)
             }
         }
@@ -786,7 +763,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     }
     @IBAction func wikipediaButtonPushed(_ sender: Any) {
         if let battle_ = battle {
-            let safari = SFSafariViewController.init(url: URL.init(string: battle_["uri"].stringValue)!)
+            let safari = SFSafariViewController.init(url: URL.init(string: battle_["primary_topic"].stringValue)!)
             safari.modalPresentationStyle = .overFullScreen
             safari.modalTransitionStyle = .coverVertical
             present(safari, animated: true, completion: nil)

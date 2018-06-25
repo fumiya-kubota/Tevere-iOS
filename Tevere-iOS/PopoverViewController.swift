@@ -59,7 +59,7 @@ class PopoverViewController: UIViewController {
     
     @IBAction func wikipediaButtonPushed(_ sender: UIButton) {
         if let data_ = data {
-            let safari = SFSafariViewController.init(url: URL.init(string: data_["uri"].stringValue)!)
+            let safari = SFSafariViewController.init(url: URL.init(string: data_["primary_topic"].stringValue)!)
             safari.modalPresentationStyle = .overFullScreen
             safari.modalTransitionStyle = .coverVertical
             present(safari, animated: true, completion: nil)
