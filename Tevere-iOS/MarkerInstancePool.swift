@@ -19,50 +19,41 @@ class MarkerInstancePool {
     let redMakerIcon = GMSMarker.markerImage(with: .red)
     let blueMakerIcon = GMSMarker.markerImage(with: .blue)
     
-    private func updateMarker(marker: GMSMarker, battle: JSON) {
+    private func generateMarker(battle: JSON, places: JSON) -> GMSMarker {
         var point = battle["points"][0]
         if point.isEmpty {
             let placeURI = battle["places"][0].stringValue
-            let places = battle["places"]
             let place = places[placeURI]
             point = place["points"][0]
         }
         let lat: CLLocationDegrees = point[0].doubleValue
         let lng: CLLocationDegrees = point[1].doubleValue
-        marker.position = CLLocationCoordinate2D(
+        let position = CLLocationCoordinate2D(
             latitude: lat,
             longitude: lng
         )
-        marker.userData = battle
+        let marker = GMSMarker(position: position)
         marker.icon = redMakerIcon
         marker.zIndex = 1
+        marker.userData = battle
+        return marker
     }
     
-    func plotMarker(battles: JSON, mapView: GMSMapView) {
+    func plotMarker(battles: JSON, places: JSON, mapView: GMSMapView) {
         var newMarkers: [String: GMSMarker] = [:]
         for battle in battles {
             let uri = battle.1["uri"].stringValue
             if plottingMarkers[uri] != nil {
                 newMarkers[uri] = plottingMarkers[uri]
                 plottingMarkers[uri] = nil
-                continue
             }
-            let marker: GMSMarker
-            if !markerPool.isEmpty {
-                marker = markerPool.popLast()!
-            } else {
-                marker = GMSMarker.init()
-            }
-            updateMarker(marker: marker, battle: battle.1)
-            newMarkers[battle.1["uri"].stringValue] = marker
-            marker.userData = battle.1
-            marker.icon = redMakerIcon
-            marker.zIndex = 1
+            let marker = generateMarker(battle: battle.1, places: places)
             marker.map = mapView
+            marker.isTappable = true
+            newMarkers[battle.1["uri"].stringValue] = marker
         }
         for marker in plottingMarkers.values {
             marker.map = nil
-            markerPool.append(marker)
         }
         self.plottingMarkers = newMarkers
     }

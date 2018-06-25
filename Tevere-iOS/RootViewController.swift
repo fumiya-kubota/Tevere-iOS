@@ -77,10 +77,6 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     @IBOutlet var commanderTitleButton: UIButton!
     @IBOutlet var subjectTitleButton: UIButton!
     
-    // Resources
-    let redMakerIcon = GMSMarker.markerImage(with: .red)
-    let blueMakerIcon = GMSMarker.markerImage(with: .blue)
-    
     // entities
     var data: JSON? = nil
     var battle: JSON? = nil
@@ -351,7 +347,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     func updateData(data: JSON) {
         self.data = data
         let battles = data["battles"]
-        markerPool.plotMarker(battles: battles, mapView: mapView)
+        markerPool.plotMarker(battles: battles, places: data["places"], mapView: mapView)
         if let battle_ = self.battle {
             if markerPool.get(uri: battle_["uri"].stringValue) == nil {
                 self.battle = nil
@@ -468,7 +464,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     func updateBattle(newBattle: JSON?) {
         if let battle_ = self.battle {
             if let marker = markerPool.get(uri: battle_["uri"].stringValue) {
-                marker.icon = redMakerIcon
+                marker.icon = markerPool.redMakerIcon
                 marker.zIndex = 1
             }
         }
@@ -611,7 +607,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
         UIView.animate(withDuration: 0.2) {
             if let battle_ = self.battle {
                 if let marker = self.markerPool.get(uri: battle_["uri"].stringValue) {
-                    marker.icon = self.blueMakerIcon
+                    marker.icon = self.markerPool.blueMakerIcon
                     marker.zIndex = 100
                 }
             }
