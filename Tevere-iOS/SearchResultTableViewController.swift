@@ -97,9 +97,9 @@ class SearchResultTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "司令官"
+            return NSLocalizedString("Commanders", comment: "Commanders")
         } else if section == 1 {
-            return "戦い"
+            return NSLocalizedString("Battles", comment: "Battles")
         }
         return nil
     }

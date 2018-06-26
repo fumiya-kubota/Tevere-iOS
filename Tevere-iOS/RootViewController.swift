@@ -749,8 +749,9 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     }
 
     func searchNC(nc: SearchNavigationController, commander: JSON, data: JSON) {
-        nc.dismiss(animated: true, completion: nil)
-        self.commander.accept(commander)
+        nc.dismiss(animated: true) {
+            self.commander.accept(commander)
+        }
     }
 
     var searchingBattle = false

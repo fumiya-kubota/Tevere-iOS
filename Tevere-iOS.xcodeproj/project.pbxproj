@@ -19,6 +19,7 @@
 		36AB5D3820DDEB8E00B0C3E1 /* ArchivedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB5D3720DDEB8E00B0C3E1 /* ArchivedData.swift */; };
 		36AB5D3A20DE403B00B0C3E1 /* SubjectPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB5D3920DE403B00B0C3E1 /* SubjectPopoverViewController.swift */; };
 		36AB5D3C20E0EB1300B0C3E1 /* MarkerInstancePool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AB5D3B20E0EB1300B0C3E1 /* MarkerInstancePool.swift */; };
+		36AB5D3F20E2ABD700B0C3E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36AB5D4120E2ABD700B0C3E1 /* Localizable.strings */; };
 		36D6E2B720CFE7A60041A336 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D6E2B620CFE7A60041A336 /* AppDelegate.swift */; };
 		36D6E2BC20CFE7A60041A336 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BA20CFE7A60041A336 /* Main.storyboard */; };
 		36D6E2BE20CFE7A70041A336 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D6E2BD20CFE7A70041A336 /* Assets.xcassets */; };
@@ -59,6 +60,9 @@
 		36AB5D3720DDEB8E00B0C3E1 /* ArchivedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivedData.swift; sourceTree = "<group>"; };
 		36AB5D3920DE403B00B0C3E1 /* SubjectPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectPopoverViewController.swift; sourceTree = "<group>"; };
 		36AB5D3B20E0EB1300B0C3E1 /* MarkerInstancePool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInstancePool.swift; sourceTree = "<group>"; };
+		36AB5D4020E2ABD700B0C3E1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		36AB5D4220E2ABE300B0C3E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		36AB5D4320E2ABE600B0C3E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		36D6E2B320CFE7A60041A336 /* Tevere-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tevere-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D6E2B620CFE7A60041A336 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36D6E2BB20CFE7A60041A336 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				36D6E2BF20CFE7A70041A336 /* LaunchScreen.storyboard */,
 				36D6E2C220CFE7A70041A336 /* Info.plist */,
 				36D6E2BD20CFE7A70041A336 /* Assets.xcassets */,
+				36AB5D4120E2ABD700B0C3E1 /* Localizable.strings */,
 			);
 			path = "Tevere-iOS";
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D6E2C120CFE7A70041A336 /* LaunchScreen.storyboard in Resources */,
+				36AB5D3F20E2ABD700B0C3E1 /* Localizable.strings in Resources */,
 				36625C0220D27F9B007343A0 /* webhostinghub-glyphs.ttf in Resources */,
 				362FDF0020DCDFC100064963 /* Settings.bundle in Resources */,
 				36D6E2BE20CFE7A70041A336 /* Assets.xcassets in Resources */,
@@ -444,6 +450,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		36AB5D4120E2ABD700B0C3E1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				36AB5D4020E2ABD700B0C3E1 /* ja */,
+				36AB5D4220E2ABE300B0C3E1 /* Base */,
+				36AB5D4320E2ABE600B0C3E1 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		36D6E2BA20CFE7A60041A336 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
