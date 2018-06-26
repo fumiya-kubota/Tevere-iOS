@@ -14,6 +14,7 @@ import SwiftyJSON
 import RxSwift
 import RxCocoa
 import SafariServices
+import GoogleMobileAds
 
 
 enum TabBarItemTag: Int {
@@ -21,7 +22,6 @@ enum TabBarItemTag: Int {
     case Battle = 2
     case Search = 3
 }
-
 
 
 func tevereURL(year: Int, singleYear: Bool) -> String {
@@ -32,7 +32,10 @@ func tevereURL(year: Int, singleYear: Bool) -> String {
 }
 
 class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate, UIPopoverPresentationControllerDelegate, PopoverViewControllerDelegate, SearchNavicationControllerDelegate {
-    
+
+    // admob
+    @IBOutlet weak var bannerView: GADBannerView?
+    let showBanner = true
     // const
     let SHOW_DETAIL_LESS: CGFloat = -90.0
     let SHOW_DETAIL_MORE: CGFloat = -UIScreen.main.bounds.height / 2
@@ -96,6 +99,16 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
     var displayLink: CADisplayLink? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
+        // admob
+        if showBanner {
+            bannerView?.adUnitID = "ca-app-pub-3840766869790640/4504556722"
+            bannerView?.rootViewController = self
+            bannerView?.load(GADRequest())
+        } else {
+            bannerView?.removeFromSuperview()
+            bannerView = nil
+        }
+
         tabBar.delegate = self
         battleViewTopConstraint.constant = 0
         let camera = GMSCameraPosition.camera(
@@ -551,7 +564,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                     self_.single.accept(true)
                     self_.age.accept(y)
                 }).disposed(by: disposeBag)
-                totalHeight += button.frame.height - 5
+                totalHeight += button.frame.height
                 self.datesStackView.addArrangedSubview(button)
             }
             self.datesStackViewHeight.constant = totalHeight
@@ -583,7 +596,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                             self_.commander.accept(commanderData)
                         }
                     }).disposed(by: disposeBag)
-                    totalHeight += button.frame.height - 5
+                    totalHeight += button.frame.height
                     self.commanderStackView.addArrangedSubview(button)
                 }
                 self.commanderStackViewHeight.constant = totalHeight
@@ -604,7 +617,7 @@ class RootViewController: UIViewController, GMSMapViewDelegate, UITabBarDelegate
                             self_.subject.accept(subjectData)
                         }
                     }).disposed(by: disposeBag)
-                    totalHeight += button.frame.height - 5
+                    totalHeight += button.frame.height
                     self.categoryStackView.addArrangedSubview(button)
                 }
                 self.categoryStackViewHeight.constant = totalHeight

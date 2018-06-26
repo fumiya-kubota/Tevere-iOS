@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import SVProgressHUD
+import GoogleMobileAds
 
 
 @UIApplicationMain
@@ -19,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-3840766869790640~9994792797")
+
         GMSServices.provideAPIKey("AIzaSyBjN9sSI8blsqQ6T5e7ujh9Xml_U5Tehvo")
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setDefaultStyle(.dark)

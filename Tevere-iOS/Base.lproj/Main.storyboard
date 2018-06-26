@@ -25,8 +25,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ul-ca-seY" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FLa-5l-wGG"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMJ-fk-N5P" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Te-V9-Gdb" userLabel="Battle View">
@@ -210,23 +217,23 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <subviews>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-220" minValue="-2500" maxValue="2018" translatesAutoresizingMaskIntoConstraints="NO" id="kVo-sA-XJG">
-                                                <rect key="frame" x="6" y="15" width="79" height="31"/>
+                                                <rect key="frame" x="6" y="15" width="230" height="31"/>
                                             </slider>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yKL-KY-cMX">
-                                                <rect key="frame" x="255" y="11.5" width="112" height="36"/>
+                                                <rect key="frame" x="337" y="12.5" width="30" height="34"/>
                                                 <fontDescription key="fontDescription" name="WebHostingHub-Glyphs" family="WebHostingHub-Glyphs" pointSize="20"/>
                                                 <state key="normal" title="chevronright"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXV-Um-4ll">
-                                                <rect key="frame" x="148" y="11.5" width="99" height="36"/>
+                                                <rect key="frame" x="299" y="12.5" width="30" height="34"/>
                                                 <fontDescription key="fontDescription" name="WebHostingHub-Glyphs" family="WebHostingHub-Glyphs" pointSize="20"/>
                                                 <state key="normal" title="chevronleft"/>
                                             </button>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hih-WG-ASD">
-                                                <rect key="frame" x="91" y="15" width="51" height="31"/>
+                                                <rect key="frame" x="242" y="15" width="51" height="31"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Single year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXm-qC-1JJ">
-                                                <rect key="frame" x="91.5" y="48" width="49" height="11"/>
+                                                <rect key="frame" x="242.5" y="48" width="49" height="11"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -282,10 +289,10 @@
                                 </items>
                             </tabBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHg-Me-3Mi" userLabel="Battle Navigation View">
-                                <rect key="frame" x="-2" y="74" width="369" height="36"/>
+                                <rect key="frame" x="223" y="76" width="144" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jhu-Rb-bJY">
-                                        <rect key="frame" x="0.0" y="0.0" width="61" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="34"/>
                                         <fontDescription key="fontDescription" name="WebHostingHub-Glyphs" family="WebHostingHub-Glyphs" pointSize="20"/>
                                         <state key="normal" title="fastleft"/>
                                         <connections>
@@ -293,7 +300,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWy-yS-nCi">
-                                        <rect key="frame" x="69" y="0.0" width="99" height="36"/>
+                                        <rect key="frame" x="38" y="0.0" width="30" height="34"/>
                                         <fontDescription key="fontDescription" name="WebHostingHub-Glyphs" family="WebHostingHub-Glyphs" pointSize="20"/>
                                         <state key="normal" title="chevronleft"/>
                                         <connections>
@@ -301,7 +308,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q6-dy-UiO">
-                                        <rect key="frame" x="176" y="0.0" width="112" height="36"/>
+                                        <rect key="frame" x="76" y="0.0" width="30" height="34"/>
                                         <fontDescription key="fontDescription" name="WebHostingHub-Glyphs" family="WebHostingHub-Glyphs" pointSize="20"/>
                                         <state key="normal" title="chevronright"/>
                                         <connections>
@@ -309,7 +316,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-C1-SKh">
-                                        <rect key="frame" x="296" y="0.0" width="73" height="36"/>
+                                        <rect key="frame" x="114" y="0.0" width="30" height="34"/>
                                         <fontDescription key="fontDescription" name="WebHostingHub-Glyphs" family="WebHostingHub-Glyphs" pointSize="20"/>
                                         <state key="normal" title="fastright"/>
                                         <connections>
@@ -345,18 +352,22 @@
                             <constraint firstItem="BMJ-fk-N5P" firstAttribute="leading" secondItem="cs0-bx-V8P" secondAttribute="leading" id="CYu-yh-WMG"/>
                             <constraint firstItem="Lf2-fk-4Sz" firstAttribute="leading" secondItem="cs0-bx-V8P" secondAttribute="leading" id="EdO-Vr-5wR"/>
                             <constraint firstItem="6Te-V9-Gdb" firstAttribute="leading" secondItem="cs0-bx-V8P" secondAttribute="leading" id="F1a-xB-RNf"/>
+                            <constraint firstItem="BMJ-fk-N5P" firstAttribute="top" secondItem="cs0-bx-V8P" secondAttribute="top" priority="750" id="FrC-1y-Gnz"/>
                             <constraint firstItem="BMJ-fk-N5P" firstAttribute="trailing" secondItem="cs0-bx-V8P" secondAttribute="trailing" id="WzW-xM-8d7"/>
                             <constraint firstItem="cs0-bx-V8P" firstAttribute="trailing" secondItem="6Te-V9-Gdb" secondAttribute="trailing" id="XND-O4-mvK"/>
                             <constraint firstItem="AL3-cw-XdL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gHg-Me-3Mi" secondAttribute="bottom" priority="750" constant="8" id="XfV-W7-MB9"/>
                             <constraint firstAttribute="bottom" secondItem="Lf2-fk-4Sz" secondAttribute="bottom" id="YWo-KQ-3Ys"/>
+                            <constraint firstItem="cs0-bx-V8P" firstAttribute="top" secondItem="0Ul-ca-seY" secondAttribute="top" id="bUo-rQ-fl9"/>
+                            <constraint firstItem="cs0-bx-V8P" firstAttribute="trailing" secondItem="0Ul-ca-seY" secondAttribute="trailing" id="d2R-TA-gCM"/>
                             <constraint firstItem="AL3-cw-XdL" firstAttribute="leading" secondItem="cs0-bx-V8P" secondAttribute="leading" id="eOO-Bc-wA5"/>
                             <constraint firstItem="Lf2-fk-4Sz" firstAttribute="top" secondItem="BMJ-fk-N5P" secondAttribute="bottom" id="ezm-gD-Q8u"/>
                             <constraint firstItem="6Te-V9-Gdb" firstAttribute="top" secondItem="Lf2-fk-4Sz" secondAttribute="top" constant="-500" id="gJJ-PC-2gA"/>
-                            <constraint firstItem="BMJ-fk-N5P" firstAttribute="top" secondItem="cs0-bx-V8P" secondAttribute="top" id="h6r-Mb-KSP"/>
                             <constraint firstAttribute="trailing" secondItem="Lf2-fk-4Sz" secondAttribute="trailing" id="kkz-ah-hdw"/>
+                            <constraint firstItem="0Ul-ca-seY" firstAttribute="leading" secondItem="cs0-bx-V8P" secondAttribute="leading" id="n7K-1s-cDV"/>
                             <constraint firstItem="6Te-V9-Gdb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gHg-Me-3Mi" secondAttribute="bottom" priority="750" constant="8" id="pF4-6u-42e"/>
                             <constraint firstItem="6Te-V9-Gdb" firstAttribute="height" secondItem="8O3-vY-VYg" secondAttribute="height" id="pHg-9i-99S"/>
                             <constraint firstItem="Lf2-fk-4Sz" firstAttribute="top" secondItem="Yf2-Fj-xra" secondAttribute="bottom" id="xgK-Xf-h9L"/>
+                            <constraint firstItem="BMJ-fk-N5P" firstAttribute="top" secondItem="0Ul-ca-seY" secondAttribute="bottom" id="yDf-m8-7Jb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cs0-bx-V8P"/>
                     </view>
@@ -370,6 +381,7 @@
                         <outlet property="ageSlider" destination="kVo-sA-XJG" id="AYY-sQ-KV7"/>
                         <outlet property="ageSwitch" destination="hih-WG-ASD" id="tCB-3J-3rS"/>
                         <outlet property="ageViewTopConstraint" destination="7yP-Pt-YJk" id="5PC-I9-KTN"/>
+                        <outlet property="bannerView" destination="0Ul-ca-seY" id="YcH-oY-nQF"/>
                         <outlet property="battleAbstractTextView" destination="EiW-b5-ftg" id="z4j-F6-ylD"/>
                         <outlet property="battleAbstractTextViewHeight" destination="Ps1-Xc-eBR" id="R3k-wr-Pxg"/>
                         <outlet property="battleItem" destination="icB-OP-xE8" id="jlP-7f-gvt"/>
