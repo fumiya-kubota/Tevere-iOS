@@ -5,6 +5,7 @@ class: center, middle, inverse
 # 歴史上の戦いを地図上に表示するやつ
 窪田文也 glucose inc.
 ---
+layout:false
 # を作った。
 ---
 # ミッドウェー海戦のDBPediaのページを見ると
