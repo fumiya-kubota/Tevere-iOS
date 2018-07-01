@@ -9,9 +9,8 @@ class: center, middle, inverse
 ---
 # ミッドウェー海戦のDBPediaのページを見ると
 → http://dbpedia.org/page/Battle_of_Midway 
+---
 * dbo:date があるから日付がわかる。
 * geo:lat geo:long があるから座標がわかる。
----
-## 終
 ---
 
